@@ -46,10 +46,10 @@ Cette section documente une **contribution à la réflexion et au processus de r
 
 Être mentionné ici n’implique pas :
 
-* la propriété du contrat NeoMundi ;
-* la qualité d’auteur de l’implémentation finale ;
-* l’approbation de chaque choix de conception NeoMundi ;
-* une responsabilité vis-à-vis de l’implémentation NeoMundi.
+- la propriété du contrat NeoMundi ;
+- la qualité d’auteur de l’implémentation finale ;
+- l’approbation de chaque choix de conception NeoMundi ;
+- une responsabilité vis-à-vis de l’implémentation NeoMundi.
 
 ---
 
@@ -59,12 +59,12 @@ Cette section documente une **contribution à la réflexion et au processus de r
 
 Principaux thèmes soulevés :
 
-* une observation ne doit pas devenir une autorisation ;
-* la réévaluation de gouvernance doit rester distincte de l’autorité d’exécution ;
-* les besoins de revue et les frontières d’autorité doivent être explicites ;
-* `execution_permission_changed` doit rester visible et sans ambiguïté ;
-* les limitations et les mesures incomplètes doivent voyager avec l’observation ;
-* le contrat doit préserver la séquence :
+- une observation ne doit pas devenir une autorisation ;
+- la réévaluation de gouvernance doit rester distincte de l’autorité d’exécution ;
+- les besoins de revue et les frontières d’autorité doivent être explicites ;
+- `execution_permission_changed` doit rester visible et sans ambiguïté ;
+- les limitations et les mesures incomplètes doivent voyager avec l’observation ;
+- le contrat doit préserver la séquence :
 
 ```text
 Observation
@@ -83,12 +83,12 @@ Ses retours ont fortement renforcé la séparation explicite entre **signal de m
 
 Principaux thèmes soulevés :
 
-* garder le contrat minimal, stable et opérationnellement interprétable ;
-* préserver la corrélation entre événements et workflows ;
-* distinguer, lorsque possible, l’identité de modèle déclarée de l’identité réellement résolue à l’exécution ;
-* maintenir séparés stabilité, cohérence et validation factuelle ;
-* rendre explicites les limitations et les mesures manquantes ;
-* préférer un petit noyau obligatoire complété par des extensions optionnelles.
+- garder le contrat minimal, stable et opérationnellement interprétable ;
+- préserver la corrélation entre événements et workflows ;
+- distinguer, lorsque possible, l’identité de modèle déclarée de l’identité réellement résolue à l’exécution ;
+- maintenir séparés stabilité, cohérence et validation factuelle ;
+- rendre explicites les limitations et les mesures manquantes ;
+- préférer un petit noyau obligatoire complété par des extensions optionnelles.
 
 Ses retours ont renforcé le principe selon lequel l’interopérabilité réussit grâce à **l’implémentation cohérente d’un petit noyau commun**, et non grâce à une complexité maximale du schéma.
 
@@ -100,12 +100,12 @@ Ses retours ont renforcé le principe selon lequel l’interopérabilité réuss
 
 Principaux thèmes soulevés :
 
-* l’interopérabilité nécessite un langage partagé de preuve et de transition d’état ;
-* identité, provenance et contexte runtime doivent rester reconstructibles ;
-* le contrat doit capturer davantage que la réponse finale ;
-* intégrité et rejouabilité sont centrales pour l’audit ;
-* deux systèmes doivent pouvoir diverger tout en conservant assez de structure commune pour comprendre pourquoi ;
-* éviter la sur-ingénierie et les artefacts de gouvernance purement rétrospectifs.
+- l’interopérabilité nécessite un langage partagé de preuve et de transition d’état ;
+- identité, provenance et contexte runtime doivent rester reconstructibles ;
+- le contrat doit capturer davantage que la réponse finale ;
+- intégrité et rejouabilité sont centrales pour l’audit ;
+- deux systèmes doivent pouvoir diverger tout en conservant assez de structure commune pour comprendre pourquoi ;
+- éviter la sur-ingénierie et les artefacts de gouvernance purement rétrospectifs.
 
 Sa contribution a mis l’accent sur **la continuité des transitions d’état et la reconstructibilité des preuves**.
 
@@ -117,11 +117,11 @@ Sa contribution a mis l’accent sur **la continuité des transitions d’état 
 
 Principaux thèmes soulevés :
 
-* l’autorité doit rester attribuable ;
-* juridiction et limites de délégation peuvent devenir importantes en aval ;
-* les chemins d’escalade et états d’override doivent rester explicites lorsque cela est nécessaire ;
-* la traçabilité seule n’établit pas une autorité légitime ;
-* l’interopérabilité ne doit pas impliquer silencieusement une permission d’agir.
+- l’autorité doit rester attribuable ;
+- juridiction et limites de délégation peuvent devenir importantes en aval ;
+- les chemins d’escalade et états d’override doivent rester explicites lorsque cela est nécessaire ;
+- la traçabilité seule n’établit pas une autorité légitime ;
+- l’interopérabilité ne doit pas impliquer silencieusement une permission d’agir.
 
 Ses retours ont renforcé la distinction entre **interopérabilité technique et autorité légitime d’exécution**.
 
@@ -133,13 +133,13 @@ Ses retours ont renforcé la distinction entre **interopérabilité technique et
 
 Principaux thèmes soulevés :
 
-* ne jamais fusionner les assertions produites par des infrastructures distinctes en une seule affirmation synthétique ;
-* identifier clairement quelle infrastructure affirme quelle information ;
-* les preuves issues d’un autre système doivent être référencées, pas absorbées silencieusement ;
-* les limitations doivent être obligatoires ;
-* le périmètre et l’applicabilité doivent rester visibles ;
-* l’interopérabilité ne doit pas devenir une certification mutuelle ;
-* éviter un verdict de gouvernance unique couvrant plusieurs systèmes souverains.
+- ne jamais fusionner les assertions produites par des infrastructures distinctes en une seule affirmation synthétique ;
+- identifier clairement quelle infrastructure affirme quelle information ;
+- les preuves issues d’un autre système doivent être référencées, pas absorbées silencieusement ;
+- les limitations doivent être obligatoires ;
+- le périmètre et l’applicabilité doivent rester visibles ;
+- l’interopérabilité ne doit pas devenir une certification mutuelle ;
+- éviter un verdict de gouvernance unique couvrant plusieurs systèmes souverains.
 
 Un principe particulièrement important issu de cette contribution est :
 
@@ -156,13 +156,13 @@ Il ne les fusionne pas.
 
 Principaux thèmes soulevés :
 
-* identité et traçabilité stables ;
-* contexte de mesure versionné ;
-* méthode de canonicalisation explicite ;
-* méthode de hash et périmètre du hash explicites ;
-* intégrité d’artefact et vérification de signature ;
-* limitations claires ;
-* petit noyau obligatoire avec extensions optionnelles.
+- identité et traçabilité stables ;
+- contexte de mesure versionné ;
+- méthode de canonicalisation explicite ;
+- méthode de hash et périmètre du hash explicites ;
+- intégrité d’artefact et vérification de signature ;
+- limitations claires ;
+- petit noyau obligatoire avec extensions optionnelles.
 
 Ses retours ont mis en évidence l’importance particulière du **périmètre du hash** : deux systèmes ne peuvent pas prétendre avoir vérifié le même artefact s’ils ne savent pas précisément quelle représentation a été hachée.
 
@@ -174,12 +174,12 @@ Ses retours ont mis en évidence l’importance particulière du **périmètre d
 
 Principaux thèmes soulevés :
 
-* transporter non seulement ce qui a été observé, mais aussi ce qui n’a pas pu l’être ;
-* exposer la surface de mesure et la visibilité déclarée ;
-* préserver les signaux non résolus ;
-* communiquer explicitement les contraintes d’interprétation ;
-* joindre les non-claims et limitations observationnelles au signal lui-même ;
-* éviter autant que possible les sémantiques trop spécifiques à une infrastructure.
+- transporter non seulement ce qui a été observé, mais aussi ce qui n’a pas pu l’être ;
+- exposer la surface de mesure et la visibilité déclarée ;
+- préserver les signaux non résolus ;
+- communiquer explicitement les contraintes d’interprétation ;
+- joindre les non-claims et limitations observationnelles au signal lui-même ;
+- éviter autant que possible les sémantiques trop spécifiques à une infrastructure.
 
 Sa contribution a renforcé le principe suivant :
 
@@ -195,11 +195,11 @@ Les frontières de mesure doivent voyager avec la mesure.
 
 Principaux thèmes soulevés :
 
-* garder volontairement petite la première version du contrat ;
-* préserver identité d’événement, traçabilité, source, horodatage et version de mesure ;
-* maintenir séparées interopérabilité, télémétrie, conformité et gouvernance interne ;
-* utiliser des simulations contrôlées comme banc d’essai d’interopérabilité ;
-* vérifier que les traces restent lisibles et auditables lorsque le volume ou la complexité augmente.
+- garder volontairement petite la première version du contrat ;
+- préserver identité d’événement, traçabilité, source, horodatage et version de mesure ;
+- maintenir séparées interopérabilité, télémétrie, conformité et gouvernance interne ;
+- utiliser des simulations contrôlées comme banc d’essai d’interopérabilité ;
+- vérifier que les traces restent lisibles et auditables lorsque le volume ou la complexité augmente.
 
 Sa contribution a également ouvert une voie de validation pratique au travers des **environnements de simulation AEROS**.
 
@@ -211,12 +211,12 @@ Sa contribution a également ouvert une voie de validation pratique au travers d
 
 Principaux thèmes soulevés :
 
-* préserver identité, continuité temporelle et provenance ;
-* distinguer état déclaré et état observé ;
-* conserver explicitement intégrité et limitations ;
-* ne pas fusionner silencieusement ce qu’une infrastructure a déclaré, ce qu’une autre a observé et ce qu’un reviewer a ensuite conclu ;
-* maintenir chaque couche attribuable et révisable indépendamment ;
-* empêcher l’interopérabilité de devenir un transfert d’autorité ou une absorption de framework.
+- préserver identité, continuité temporelle et provenance ;
+- distinguer état déclaré et état observé ;
+- conserver explicitement intégrité et limitations ;
+- ne pas fusionner silencieusement ce qu’une infrastructure a déclaré, ce qu’une autre a observé et ce qu’un reviewer a ensuite conclu ;
+- maintenir chaque couche attribuable et révisable indépendamment ;
+- empêcher l’interopérabilité de devenir un transfert d’autorité ou une absorption de framework.
 
 Ses retours ont renforcé une discipline centrale :
 
@@ -238,35 +238,29 @@ L’interopérabilité dépend de la cohérence d’implémentation.
 
 Un petit noyau obligatoire est généralement préférable à un schéma exhaustif mais implémenté de façon inconsistante.
 
----
-
 ## 2.2 La mesure n’est pas l’autorité
 
 Une mesure runtime peut informer un autre système.
 
 Elle ne doit pas automatiquement :
 
-* autoriser l’exécution ;
-* bloquer l’exécution ;
-* modifier une permission ;
-* établir la vérité ;
-* établir la sécurité ;
-* transférer l’autorité.
-
----
+- autoriser l’exécution ;
+- bloquer l’exécution ;
+- modifier une permission ;
+- établir la vérité ;
+- établir la sécurité ;
+- transférer l’autorité.
 
 ## 2.3 Les limitations voyagent avec le signal
 
 Une mesure doit rendre visible :
 
-* ce qui a été observé ;
-* dans quel périmètre ;
-* avec quelle couverture ;
-* avec quelles limitations ;
-* ce qui reste non résolu ;
-* et ce que la mesure **n’établit pas**.
-
----
+- ce qui a été observé ;
+- dans quel périmètre ;
+- avec quelle couverture ;
+- avec quelles limitations ;
+- ce qui reste non résolu ;
+- et ce que la mesure **n’établit pas**.
 
 ## 2.4 Préserver la provenance
 
@@ -284,27 +278,21 @@ avec quelle référence d’intégrité
 
 et reconstruire la trace pertinente.
 
----
-
 ## 2.5 Préserver la souveraineté des infrastructures
 
 L’interopérabilité relie des systèmes.
 
 Elle ne doit pas fusionner silencieusement :
 
-* leurs assertions ;
-* leurs politiques ;
-* leurs preuves ;
-* leurs modèles de gouvernance ;
-* leur autorité.
-
----
+- leurs assertions ;
+- leurs politiques ;
+- leurs preuves ;
+- leurs modèles de gouvernance ;
+- leur autorité.
 
 ## 2.6 L’intégrité doit être vérifiable indépendamment
 
 Canonicalisation, hash, signatures et références de vérification doivent être suffisamment explicites pour qu’un système indépendant puisse reproduire la vérification.
-
----
 
 ## 2.7 Le consommateur garde le contrôle
 
@@ -341,14 +329,14 @@ Ces travaux ont exploré la manière dont les objets de mesure runtime NeoMundi 
 
 Principaux axes de contribution :
 
-* tester l’articulation entre les objets de signal runtime NeoMundi et une infrastructure de gouvernance indépendante ;
-* préserver la séparation entre mesure runtime et évaluation de gouvernance en aval ;
-* préserver la frontière entre observation et autorité d’exécution ;
-* documenter les flux d’objets entre les deux infrastructures ;
-* travailler avec des objets de gouvernance, des reçus et des mécanismes de replay ;
-* explorer la préservation de la provenance, du versioning et de la continuité de preuve au travers de l’interface ;
-* contribuer à du matériel de vérification exécutable et à une documentation d’interopérabilité structurée ;
-* aider à clarifier la manière dont une infrastructure peut consommer le signal d’une autre infrastructure sans absorber son autorité.
+- tester l’articulation entre les objets de signal runtime NeoMundi et une infrastructure de gouvernance indépendante ;
+- préserver la séparation entre mesure runtime et évaluation de gouvernance en aval ;
+- préserver la frontière entre observation et autorité d’exécution ;
+- documenter les flux d’objets entre les deux infrastructures ;
+- travailler avec des objets de gouvernance, des reçus et des mécanismes de replay ;
+- explorer la préservation de la provenance, du versioning et de la continuité de preuve au travers de l’interface ;
+- contribuer à du matériel de vérification exécutable et à une documentation d’interopérabilité structurée ;
+- aider à clarifier la manière dont une infrastructure peut consommer le signal d’une autre infrastructure sans absorber son autorité.
 
 Cette contribution illustre un principe important d’interopérabilité :
 
@@ -375,10 +363,10 @@ Il démontre l’architecture, l’articulation des objets, les reçus, le repla
 
 Il ne doit pas être interprété comme :
 
-* une validation indépendante en production ;
-* un traitement autonome de payloads NeoMundi réels et arbitraires ;
-* une certification de l’une ou l’autre infrastructure ;
-* une preuve que tous les chemins possibles d’intégration NeoMundi/OGS ont été validés.
+- une validation indépendante en production ;
+- un traitement autonome de payloads NeoMundi réels et arbitraires ;
+- une certification de l’une ou l’autre infrastructure ;
+- une preuve que tous les chemins possibles d’intégration NeoMundi/OGS ont été validés.
 
 Cette distinction est volontaire et fait partie de la frontière de preuve.
 
@@ -392,6 +380,7 @@ de l’interopérabilité comme idée
 l’interopérabilité comme frontière
 technique effectivement implémentée
 ```
+
 ---
 
 ## Richard — RiCo / ManChine
@@ -422,6 +411,13 @@ RiCo vérifie et interprète
         ↓
 RiCo conserve l’admissibilité,
 la gouvernance et la gestion des conséquences
+```
+
+Le pilote est actuellement en cours.
+
+Son objectif n’est pas de démontrer que le contrat est déjà universellement interopérable, mais de l’exposer à une implémentation indépendante et de documenter ce qui fonctionne, ce qui échoue et ce qui doit évoluer.
+
+La contribution de Richard appartient donc à la **phase d’implémentation et de pilotes** du projet.
 
 ---
 
@@ -431,16 +427,16 @@ Cette section est actuellement en cours de consolidation.
 
 Les futures entrées pourront inclure des travaux impliquant :
 
-* des implémentations consommatrices indépendantes ;
-* des intégrations avec des infrastructures souveraines ;
-* des environnements d’orchestration d’agents ;
-* des systèmes de gouvernance ;
-* des infrastructures d’audit et de preuve ;
-* des environnements de simulation ;
-* des plateformes de monitoring runtime ;
-* des implémentations de recherche ;
-* des vérifications cryptographiques indépendantes ;
-* de la traçabilité inter-infrastructures.
+- des implémentations consommatrices indépendantes ;
+- des intégrations avec des infrastructures souveraines ;
+- des environnements d’orchestration d’agents ;
+- des systèmes de gouvernance ;
+- des infrastructures d’audit et de preuve ;
+- des environnements de simulation ;
+- des plateformes de monitoring runtime ;
+- des implémentations de recherche ;
+- des vérifications cryptographiques indépendantes ;
+- de la traçabilité inter-infrastructures.
 
 Des pilotes et contributeurs techniques supplémentaires seront ajoutés à mesure que leur participation et leur attribution publique seront confirmées.
 
@@ -529,17 +525,17 @@ une primitive d’interopérabilité avec des infrastructures indépendantes.
 
 Le dépôt public comprend déjà :
 
-* la spécification NeoMundi Measurement Interoperability ;
-* un JSON Schema versionné ;
-* deux exemples réels de contrats NeoMundi signés ;
-* l’intégrité du payload par SHA-256 ;
-* des signatures Ed25519/JWS ;
-* une vérification via JWKS public ;
-* un consommateur de référence indépendant ;
-* des vérifications de souveraineté ;
-* des exemples de routage définis par le consommateur ;
-* un stockage de reçus auditables ;
-* un chemin de vérification offline.
+- la spécification NeoMundi Measurement Interoperability ;
+- un JSON Schema versionné ;
+- deux exemples réels de contrats NeoMundi signés ;
+- l’intégrité du payload par SHA-256 ;
+- des signatures Ed25519/JWS ;
+- une vérification via JWKS public ;
+- un consommateur de référence indépendant ;
+- des vérifications de souveraineté ;
+- des exemples de routage définis par le consommateur ;
+- un stockage de reçus auditables ;
+- un chemin de vérification offline.
 
 Cela signifie que la V0.1 actuelle peut déjà démontrer :
 
@@ -562,14 +558,14 @@ NeoMundi prévoit de publier une version stable de la couche d’interopérabili
 
 La période actuelle doit permettre de :
 
-* tester le contrat face à des infrastructures indépendantes ;
-* identifier les ambiguïtés sémantiques ;
-* valider la vérification cryptographique indépendante ;
-* documenter les patterns d’implémentation ;
-* exposer les cas d’échec ;
-* challenger les frontières de responsabilité ;
-* réduire la complexité inutile ;
-* stabiliser le noyau obligatoire.
+- tester le contrat face à des infrastructures indépendantes ;
+- identifier les ambiguïtés sémantiques ;
+- valider la vérification cryptographique indépendante ;
+- documenter les patterns d’implémentation ;
+- exposer les cas d’échec ;
+- challenger les frontières de responsabilité ;
+- réduire la complexité inutile ;
+- stabiliser le noyau obligatoire.
 
 La future version open source a vocation à représenter non seulement un format JSON publié, mais une couche d’interopérabilité qui aura été :
 
@@ -591,13 +587,13 @@ L’interopérabilité ne peut pas être établie par simple déclaration.
 
 Un schéma peut sembler cohérent tout en échouant lorsque :
 
-* une autre infrastructure interprète un champ différemment ;
-* les hypothèses de canonicalisation divergent ;
-* les frontières d’autorité deviennent ambiguës ;
-* la provenance se perd ;
-* les signatures ne peuvent pas être vérifiées indépendamment ;
-* les limitations disparaissent en aval ;
-* le système récepteur confond une observation avec une décision.
+- une autre infrastructure interprète un champ différemment ;
+- les hypothèses de canonicalisation divergent ;
+- les frontières d’autorité deviennent ambiguës ;
+- la provenance se perd ;
+- les signatures ne peuvent pas être vérifiées indépendamment ;
+- les limitations disparaissent en aval ;
+- le système récepteur confond une observation avec une décision.
 
 L’objectif de ce processus de développement collectif n’est donc pas seulement de recueillir des opinions.
 
@@ -613,25 +609,25 @@ Il ne constitue **pas une cession juridique de propriété intellectuelle**.
 
 Être mentionné ici signifie qu’une personne ou une organisation a contribué par :
 
-* des retours ;
-* une revue technique ;
-* des tests ;
-* des travaux d’implémentation ;
-* une activité pilote ;
-* de la simulation ;
-* de la documentation ;
-* de la validation ;
-* ou une autre contribution documentée au processus de développement.
+- des retours ;
+- une revue technique ;
+- des tests ;
+- des travaux d’implémentation ;
+- une activité pilote ;
+- de la simulation ;
+- de la documentation ;
+- de la validation ;
+- ou une autre contribution documentée au processus de développement.
 
 Cela ne signifie pas nécessairement que le contributeur :
 
-* est auteur du contrat NeoMundi ;
-* est propriétaire du contrat NeoMundi ;
-* approuve chaque élément de l’implémentation actuelle ;
-* accepte une responsabilité vis-à-vis de l’implémentation NeoMundi ;
-* transfère des droits de propriété intellectuelle ;
-* représente NeoMundi ;
-* certifie le système NeoMundi.
+- est auteur du contrat NeoMundi ;
+- est propriétaire du contrat NeoMundi ;
+- approuve chaque élément de l’implémentation actuelle ;
+- accepte une responsabilité vis-à-vis de l’implémentation NeoMundi ;
+- transfère des droits de propriété intellectuelle ;
+- représente NeoMundi ;
+- certifie le système NeoMundi.
 
 Les déclarations spécifiques concernant une organisation, les logos et les affirmations de partenariat ne doivent être utilisées qu’une fois leur attribution publique confirmée.
 
@@ -649,13 +645,13 @@ Certaines personnes ont contribué au travers de revues conceptuelles.
 
 D’autres contribuent au travers de :
 
-* l’implémentation ;
-* les tests ;
-* la simulation ;
-* l’intégration pilote ;
-* la vérification indépendante ;
-* la documentation ;
-* de futurs travaux open source.
+- l’implémentation ;
+- les tests ;
+- la simulation ;
+- l’intégration pilote ;
+- la vérification indépendante ;
+- la documentation ;
+- de futurs travaux open source.
 
 L’objectif n’est pas de figer trop tôt une liste artificielle.
 
