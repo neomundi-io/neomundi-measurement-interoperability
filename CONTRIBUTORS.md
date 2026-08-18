@@ -389,6 +389,36 @@ to
         ↓
 interoperability as an implemented technical boundary
 ```
+---
+
+## Richard — RiCo / ManChine
+
+**Contribution type:** pilot integration, cross-infrastructure interoperability, admissibility handoff and governance receipts.
+
+Richard is contributing through an interoperability pilot between **NeoMundi and RiCo / ManChine**.
+
+The objective of the pilot is to test how a signed NeoMundi runtime measurement can be transported into an independent infrastructure while preserving a strict boundary between measurement and downstream governance.
+
+Key contribution areas include:
+
+- testing the NeoMundi Measurement Interoperability Contract against an independent infrastructure;
+- preserving the separation between NeoMundi runtime measurement and RiCo admissibility logic;
+- exploring how governance receipts can be generated downstream without modifying the original NeoMundi measurement;
+- testing whether provenance, integrity and responsibility boundaries remain understandable across the interface;
+- identifying integration friction, ambiguous semantics and missing implementation guidance;
+- contributing practical feedback that can help harden the public interoperability contract.
+
+The intended boundary is:
+
+```text
+NeoMundi measures
+        ↓
+signed interoperability contract
+        ↓
+RiCo verifies and interprets
+        ↓
+RiCo retains admissibility,
+governance and consequence handling
 
 ---
 
