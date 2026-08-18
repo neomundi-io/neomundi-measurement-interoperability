@@ -371,19 +371,35 @@ It does not require importing the internal components that generated the measure
 
 ## Offline demonstration
 
+The reference consumer can be executed without a live NeoMundi server.
+
+From the `consumer-reference/` directory:
+
 ```bash
+python -m pip install -r requirements.txt
 python -m rgc_consumer_demo.cli --offline
 ```
 
-The demonstration uses:
+The offline demonstration uses:
 
-* demonstration contracts;
-* a local schema;
-* a dedicated demonstration key.
+* two real signed NeoMundi contracts from `../examples/`;
+* the public contract schema from `../schema/contract-v0.1.schema.json`;
+* the public NeoMundi JWKS stored locally in `rgc_consumer_demo/fixtures/public_jwks.json`.
 
-It can run without an active NeoMundi server and without a network connection.
+No NeoMundi API key is required.
 
-The key used for this demonstration is not a production key.
+No private signing key is included.
+
+The local JWKS contains only the public key required to independently verify the Ed25519/JWS signatures of the published example contracts.
+
+Expected result for both contracts:
+
+```text
+hash_match=True
+signature_valid=True
+```
+
+See the full [Reference Consumer documentation](./consumer-reference/README.md).
 
 ---
 
