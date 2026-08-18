@@ -6,6 +6,38 @@
 
 ---
 
+# NeoMundi Measurement Interoperability
+
+**Qu’est-ce que c’est ?**
+Une façon simple de faire passer une mesure NeoMundi d’un système à un autre sous forme de JSON signé et vérifiable.
+
+**À quoi ça sert ?**
+Votre infrastructure peut recevoir une mesure NeoMundi, vérifier qu’elle est authentique, lire le signal, puis décider elle-même quoi en faire.
+
+**Pour qui ?**
+Plateformes cloud, systèmes d’IA, agents, outils de gouvernance, systèmes d’audit, plateformes de monitoring et toute infrastructure qui veut consommer les mesures NeoMundi sans dépendre du code interne NeoMundi.
+
+**Comment l’activer ?**
+Vous produisez une mesure NeoMundi, récupérez son contrat d’interopérabilité, puis vous le validez et le vérifiez avec le schéma public et la clé publique.
+
+```text
+Système d’IA
+   ↓
+NeoMundi mesure
+   ↓
+contrat JSON signé
+   ↓
+votre système vérifie
+   ↓
+votre système décide quoi faire
+```
+
+**NeoMundi mesure. Votre infrastructure décide.**
+
+[🇫🇷 Français](./README_FR.md) · [🇬🇧 English](./README.md) · [Exemples](./examples/) · [Consumer de référence](./consumer-reference/)
+
+---
+
 ## Principe
 
 NeoMundi fournit un **signal de mesure runtime** et sa **trace vérifiable**.
