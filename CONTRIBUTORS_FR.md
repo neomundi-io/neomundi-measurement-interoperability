@@ -392,6 +392,36 @@ de l’interopérabilité comme idée
 l’interopérabilité comme frontière
 technique effectivement implémentée
 ```
+---
+
+## Richard — RiCo / ManChine
+
+**Type de contribution :** intégration pilote, interopérabilité inter-infrastructures, passage vers l’admissibilité et reçus de gouvernance.
+
+Richard contribue au travers d’un pilote d’interopérabilité entre **NeoMundi et RiCo / ManChine**.
+
+L’objectif du pilote est de tester comment une mesure runtime NeoMundi signée peut être transportée vers une infrastructure indépendante tout en préservant une frontière stricte entre mesure et gouvernance en aval.
+
+Principaux axes de contribution :
+
+- tester le NeoMundi Measurement Interoperability Contract face à une infrastructure indépendante ;
+- préserver la séparation entre la mesure runtime NeoMundi et la logique d’admissibilité RiCo ;
+- explorer la manière dont des reçus de gouvernance peuvent être produits en aval sans modifier la mesure NeoMundi d’origine ;
+- tester si la provenance, l’intégrité et les frontières de responsabilité restent compréhensibles au travers de l’interface ;
+- identifier les frictions d’intégration, les ambiguïtés sémantiques et les éventuels besoins de documentation supplémentaires ;
+- contribuer par des retours pratiques au durcissement du contrat public d’interopérabilité.
+
+La frontière recherchée est :
+
+```text
+NeoMundi mesure
+        ↓
+contrat d’interopérabilité signé
+        ↓
+RiCo vérifie et interprète
+        ↓
+RiCo conserve l’admissibilité,
+la gouvernance et la gestion des conséquences
 
 ---
 
