@@ -6,6 +6,36 @@
 
 ---
 
+**What is it?**
+A simple way to move a NeoMundi AI measurement from one system to another in a signed, verifiable JSON format.
+
+**What is it for?**
+It lets your infrastructure receive a NeoMundi measurement, check that it is authentic, understand the signal, and decide what to do with it.
+
+**Who is it for?**
+Cloud platforms, AI systems, agents, governance tools, audit systems, monitoring platforms, and any infrastructure that wants to consume NeoMundi measurements without depending on NeoMundi’s internal code.
+
+**How do I activate it?**
+Generate a NeoMundi measurement, retrieve its interoperability contract, then validate and verify it with the public schema and public key.
+
+```text
+AI system
+   ↓
+NeoMundi measures
+   ↓
+signed JSON contract
+   ↓
+your system verifies it
+   ↓
+your system decides what to do
+```
+
+**NeoMundi measures. Your infrastructure decides.**
+
+[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) · [Examples](./examples/) · [Reference Consumer](./consumer-reference/)
+
+---
+
 ## Principle
 
 NeoMundi provides a **runtime measurement signal** and its **verifiable trace**.
