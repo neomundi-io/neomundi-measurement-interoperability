@@ -18,6 +18,8 @@ Cloud platforms, AI systems, agents, governance tools, audit systems, monitoring
 **How do I activate it?**
 Generate a NeoMundi measurement, retrieve its interoperability contract, then validate and verify it with the public schema and public key.
 
+**This contract is not being built in isolation: it is being challenged, tested and strengthened by an evolving circle of independent contributors and pilot infrastructures — follow the story in [Contributors & Collective Development](./CONTRIBUTORS.md).**
+
 ```text
 AI system
    ↓
