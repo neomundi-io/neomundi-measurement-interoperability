@@ -371,19 +371,35 @@ Elle ne nécessite pas l’import des composants internes qui ont généré la m
 
 ## Démonstration hors ligne
 
+Le consommateur de référence peut être exécuté sans serveur NeoMundi actif.
+
+Depuis le dossier `consumer-reference/` :
+
 ```bash
+python -m pip install -r requirements.txt
 python -m rgc_consumer_demo.cli --offline
 ```
 
-La démonstration utilise :
+La démonstration hors ligne utilise :
 
-* des contrats de démonstration ;
-* un schéma local ;
-* une clé de démonstration dédiée.
+* deux contrats NeoMundi réels signés depuis `../examples/` ;
+* le schéma public du contrat depuis `../schema/contract-v0.1.schema.json` ;
+* le JWKS public NeoMundi conservé localement dans `rgc_consumer_demo/fixtures/public_jwks.json`.
 
-Elle peut fonctionner sans serveur NeoMundi actif et sans connexion réseau.
+Aucune clé API NeoMundi n’est nécessaire.
 
-La clé utilisée pour cette démonstration n’est pas une clé de production.
+Aucune clé privée de signature n’est incluse.
+
+Le JWKS local contient uniquement la clé publique nécessaire pour vérifier indépendamment les signatures Ed25519/JWS des contrats publiés.
+
+Résultat attendu pour les deux contrats :
+
+```text
+hash_match=True
+signature_valid=True
+```
+
+Voir la [documentation complète du consommateur de référence](./consumer-reference/README.md).
 
 ---
 
