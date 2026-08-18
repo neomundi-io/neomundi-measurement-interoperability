@@ -20,6 +20,8 @@ Plateformes cloud, systèmes d’IA, agents, outils de gouvernance, systèmes d�
 **Comment l’activer ?**
 Vous produisez une mesure NeoMundi, récupérez son contrat d’interopérabilité, puis vous le validez et le vérifiez avec le schéma public et la clé publique.
 
+**Ce contrat n’est pas construit en vase clos : il est challengé, testé et renforcé par un cercle évolutif de contributeurs indépendants et d’infrastructures pilotes — suivez cette histoire dans [Contributeurs & développement collectif](./CONTRIBUTORS_FR.md).**
+
 ```text
 Système d’IA
    ↓
