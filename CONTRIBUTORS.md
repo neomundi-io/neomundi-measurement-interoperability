@@ -208,14 +208,14 @@ His contribution also opened a practical validation path through **AEROS simulat
 
 **Contribution focus:** declaration vs observation vs interpretation vs authority.
 
-Key themes raised:
+**Key themes raised:**
 
-- preserve identity, time continuity and provenance;
-- distinguish declared state from observed state;
-- explicitly preserve integrity and limitations;
-- do not silently merge what one infrastructure declared, another observed, and a reviewer later concluded;
-- keep each layer attributable and independently reviewable;
-- prevent interoperability from becoming authority transfer or framework absorption.
+* preserve identity, time continuity and provenance;
+* distinguish declared state from observed state;
+* explicitly preserve integrity and limitations;
+* do not silently merge what one infrastructure declared, another observed, and a reviewer later concluded;
+* keep each layer attributable and independently reviewable;
+* prevent interoperability from becoming authority transfer or framework absorption.
 
 His feedback reinforced a central design discipline:
 
@@ -224,6 +224,8 @@ Declaration ≠ Observation
 Observation ≠ Interpretation
 Interpretation ≠ Authority
 ```
+
+James Aull reviewed and explicitly confirmed this contributor entry for the current repository.
 
 ---
 
