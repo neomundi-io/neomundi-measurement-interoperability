@@ -207,25 +207,24 @@ Sa contribution a également ouvert une voie de validation pratique au travers d
 
 ## James Aull
 
-**Axe de contribution :** déclaration vs observation vs interprétation vs autorité.
+**Focus de contribution :** déclaration vs observation vs interprétation vs autorité.
 
-Principaux thèmes soulevés :
+**Principaux thèmes soulevés :**
 
-- préserver identité, continuité temporelle et provenance ;
-- distinguer état déclaré et état observé ;
-- conserver explicitement intégrité et limitations ;
-- ne pas fusionner silencieusement ce qu’une infrastructure a déclaré, ce qu’une autre a observé et ce qu’un reviewer a ensuite conclu ;
-- maintenir chaque couche attribuable et révisable indépendamment ;
-- empêcher l’interopérabilité de devenir un transfert d’autorité ou une absorption de framework.
+* préserver l’identité, la continuité temporelle et la provenance ;
+* distinguer l’état déclaré de l’état observé ;
+* préserver explicitement l’intégrité et les limitations ;
+* ne pas fusionner silencieusement ce qu’une infrastructure a déclaré, ce qu’une autre a observé et ce qu’un évaluateur a ensuite conclu ;
+* maintenir chaque couche attribuable et révisable indépendamment ;
+* empêcher que l’interopérabilité ne devienne un transfert d’autorité ou une absorption de framework.
 
-Ses retours ont renforcé une discipline centrale :
+Son retour a renforcé une discipline centrale de conception :
 
 ```text
 Déclaration ≠ Observation
 Observation ≠ Interprétation
 Interprétation ≠ Autorité
 ```
-
 ---
 
 # 2. Principes communs émergents
