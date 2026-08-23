@@ -225,8 +225,6 @@ Observation ≠ Interpretation
 Interpretation ≠ Authority
 ```
 
-James Aull reviewed and explicitly confirmed this contributor entry for the current repository.
-
 ---
 
 # 2. Emerging shared principles
