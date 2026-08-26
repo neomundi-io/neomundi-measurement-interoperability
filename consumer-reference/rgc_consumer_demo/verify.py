@@ -98,12 +98,15 @@ def _jwk_to_public_key(
 
 
 def _canonical_sha256(payload: dict[str, Any]) -> str:
-    """Return SHA-256 over canonical sorted compact UTF-8 JSON."""
+    """Return SHA-256 over canonical sorted compact UTF-8 JSON.
+
+    This intentionally preserves the historical canonicalization used by
+    the signed RGC v0.1 contracts.
+    """
     canonical = json.dumps(
         payload,
         sort_keys=True,
         separators=(",", ":"),
-        ensure_ascii=False,
     )
     return hashlib.sha256(
         canonical.encode("utf-8")
@@ -203,14 +206,11 @@ def verify_contract(
 
             header = jwt.get_unverified_header(signature)
 
-            # The signature algorithm is normative.
             if header.get("alg") != "EdDSA":
                 raise ValueError(
                     f"Unexpected JWS algorithm: {header.get('alg')!r}"
                 )
 
-            # If the JWS declares a key id, it must be the same key id
-            # declared by the contract integrity section.
             header_kid = header.get("kid")
             if header_kid is not None and header_kid != key_id:
                 raise ValueError(
