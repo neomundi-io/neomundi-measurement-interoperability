@@ -1,113 +1,67 @@
-# Interopérabilité des mesures NeoMundi
+# NeoMundi Measurement Interoperability
 
 [🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) · [NeoMundi](https://neomundi.io) · [API](https://api.neomundi.io)
 
-> **Spécification publique d’interopérabilité permettant de transporter des signaux de mesure runtime NeoMundi signés, versionnés et vérifiables entre des systèmes indépendants.**
+> **Spécification publique d’interopérabilité pour transporter des signaux de mesure runtime NeoMundi signés, versionnés et vérifiables indépendamment entre systèmes distincts.**
 
 ---
 
-**Qu’est-ce que c’est ?**  
-Un moyen simple de transporter une mesure NeoMundi d’un système à un autre dans un format JSON signé et vérifiable.
+**Qu’est-ce que c’est ?**
+Un contrat public permettant de transporter une mesure runtime NeoMundi d’un système IA vers un autre système sous forme JSON signée, versionnée et vérifiable.
 
-**À quoi cela sert-il ?**  
-Cela permet à votre infrastructure de recevoir une mesure NeoMundi, de vérifier son authenticité, de comprendre le signal et de décider elle-même de ce qu’elle souhaite en faire.
+**À quoi cela sert-il ?**
+Il permet à une infrastructure indépendante de recevoir une mesure NeoMundi, d’en vérifier l’intégrité et la provenance, d’en comprendre la frontière de mesure, puis de décider quoi en faire selon sa propre politique.
 
-**À qui cela s’adresse-t-il ?**  
-Aux plateformes cloud, systèmes d’IA, agents, outils de gouvernance, systèmes d’audit, plateformes de monitoring et, plus généralement, à toute infrastructure souhaitant consommer des mesures NeoMundi sans dépendre du code interne de NeoMundi.
+**À qui cela s’adresse-t-il ?**
+Aux plateformes cloud, systèmes IA, agents, outils de gouvernance, systèmes d’observabilité, infrastructures d’audit, plateformes de monitoring et à toute infrastructure souhaitant consommer des mesures NeoMundi sans dépendre du moteur interne de mesure NeoMundi.
 
-**Comment l’activer ?**  
-Générez une mesure NeoMundi, récupérez son contrat d’interopérabilité, puis validez-le et vérifiez-le à l’aide du schéma public et de la clé publique.
+**Comment l’utiliser ?**
+Générez ou recevez un contrat de mesure NeoMundi, validez-le contre la version de schéma qu’il déclare, vérifiez indépendamment son intégrité cryptographique, puis appliquez votre propre interprétation et votre propre politique.
 
-**Ce contrat n’est pas développé de manière isolée : il est challengé, testé et renforcé par un cercle évolutif de contributeurs indépendants et d’infrastructures pilotes — suivez cette construction dans [Contributors & Collective Development](./CONTRIBUTORS.md).**
+**Ce contrat n’est pas développé isolément. Il est challengé, testé et renforcé par un cercle évolutif de contributeurs indépendants et d’infrastructures pilotes — voir [Contributors & Collective Development](./CONTRIBUTORS.md).**
 
 ```text
-Système d’IA
+Système IA
     ↓
 NeoMundi mesure
     ↓
-contrat JSON signé
+contrat d’interopérabilité signé
     ↓
 votre système le vérifie
+    ↓
+votre système l’interprète
     ↓
 votre système décide quoi en faire
 ```
 
 **NeoMundi mesure. Votre infrastructure décide.**
 
-[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) · [Exemples](./examples/) · [Consommateur de référence](./consumer-reference/)
+[Exemples](./examples/) · [Consommateur de référence](./consumer-reference/)
 
 ---
 
-## Principe
+# Principe
 
-NeoMundi fournit un **signal de mesure runtime** ainsi que sa **trace vérifiable**.
+NeoMundi fournit un **signal de mesure runtime** et sa **trace vérifiable**.
 
-L’infrastructure qui reçoit ce signal conserve le contrôle complet sur :
+L’infrastructure qui reçoit ce signal conserve le contrôle sur :
 
-- l’interprétation ;
-- la politique ;
-- la décision ;
-- l’action.
+* l’interprétation ;
+* la politique ;
+* la décision ;
+* l’action.
 
-**NeoMundi mesure. Votre infrastructure décide.**
+Le contrat d’interopérabilité standardise **l’interface entre la mesure et sa consommation**.
 
-Une interopérabilité publique ne signifie **pas** une implémentation publique.
+Il ne standardise, ne révèle et ne prescrit pas :
 
-Une infrastructure consommatrice peut conserver entièrement privés, propriétaires ou confidentiels sa logique d’interprétation, ses règles de politique, ses seuils, ses mécanismes de décision, son architecture de gouvernance et ses mécanismes d’exécution.
+* l’implémentation interne de la mesure NeoMundi ;
+* le moteur de politique du consommateur ;
+* les seuils du consommateur ;
+* ses mécanismes d’enforcement ;
+* son architecture interne spécifique.
 
----
-
-## Pourquoi ce contrat existe
-
-Un système d’IA peut être mesuré par NeoMundi sans que l’infrastructure consommant cette mesure dépende du code interne de NeoMundi.
-
-Le **NeoMundi Measurement Interoperability Contract** fournit une représentation JSON :
-
-- structurée ;
-- versionnée ;
-- signée cryptographiquement ;
-- vérifiable indépendamment ;
-- exploitable automatiquement par des systèmes tiers.
-
-Il permet à une infrastructure externe de :
-
-- valider la structure du contrat ;
-- vérifier son intégrité ;
-- vérifier sa signature cryptographique ;
-- corréler l’observation entre plusieurs systèmes ;
-- lire les signaux de mesure et leurs limites ;
-- appliquer ses propres règles de gouvernance ;
-- conserver une preuve auditable.
-
-Le contrat standardise **l’interface entre la mesure et sa consommation**. Il ne standardise, ne divulgue et ne prescrit pas l’implémentation interne du consommateur.
-
----
-
-## Architecture
-
-```text
-Système d’IA
-    ↓
-Mesure runtime NeoMundi
-    ↓
-Contrat d’interopérabilité signé
-    ↓
-Infrastructure tierce
-    ↓
-Interprétation
-    ↓
-Politique
-    ↓
-Décision / Action
-```
-
-Le contrat transporte **la mesure**.
-
-Il ne transfère pas à NeoMundi le contrôle du système.
-
-Il n’oblige pas non plus l’infrastructure consommatrice à exposer la logique propriétaire qu’elle applique après réception de la mesure.
-
-Une frontière utile peut être représentée ainsi :
+**Interopérabilité publique ne signifie pas implémentation publique.**
 
 ```text
 NeoMundi
@@ -115,28 +69,61 @@ mesure
     ↓
 COUCHE PUBLIQUE D’INTEROPÉRABILITÉ
 contrat signé
+schéma
 validation
 vérification
     ↓
-────────────────────────────────
-frontière du consommateur
-────────────────────────────────
+────────────────────────────
+frontière consommateur
+────────────────────────────
     ↓
 COUCHE PRIVÉE / SPÉCIFIQUE AU PARTENAIRE
 interprétation
 politique
 seuils
 décision
-exécution
+action
 ```
 
 **Interface ouverte ≠ implémentation ouverte.**
 
 ---
 
-# 1. Ce que transporte le contrat
+# 1. Pourquoi ce contrat existe
 
-Le contrat est organisé autour de cinq sections principales :
+Un système IA peut être mesuré par NeoMundi sans que l’infrastructure qui consomme cette mesure dépende du code interne de NeoMundi.
+
+Le **NeoMundi Measurement Interoperability Contract** fournit une représentation :
+
+* structurée ;
+* versionnée ;
+* signée cryptographiquement ;
+* vérifiable indépendamment ;
+* consommable par machine ;
+* explicite sur sa frontière de mesure.
+
+Il permet à une infrastructure externe de :
+
+* valider la structure du contrat ;
+* vérifier sa version de schéma ;
+* vérifier l’intégrité du payload ;
+* vérifier la signature cryptographique ;
+* corréler l’observation entre plusieurs systèmes ;
+* consommer les signaux de mesure ;
+* comprendre les limites de mesure ;
+* distinguer les dimensions mesurées de celles qui ne le sont pas ;
+* appliquer ses propres règles de gouvernance ;
+* conserver une preuve auditable.
+
+Le contrat définit **ce que signifie le signal et comment il peut être consommé de manière sûre**.
+
+Il ne nécessite pas de reconstruire le moteur interne de mesure NeoMundi.
+
+---
+
+# 2. Structure du contrat
+
+Le contrat contient cinq sections principales :
 
 ```text
 identity
@@ -146,68 +133,290 @@ governance
 integrity
 ```
 
+---
+
 ## `identity`
 
 Permet d’identifier et de corréler l’observation entre plusieurs systèmes.
 
-Le modèle est représenté sous forme pseudonymisée ou comme :
+Cette section comprend notamment :
+
+* la version du schéma ;
+* l’identifiant de requête ;
+* l’identifiant de trace ;
+* l’horodatage ;
+* l’identifiant système ;
+* l’identifiant pseudonymisé du modèle ;
+* le mode runtime.
+
+Le modèle doit être pseudonymisé ou représenté par :
 
 ```text
 local
 ```
 
-Les identifiants bruts des modèles fournisseurs ne sont pas transportés.
+Les identifiants bruts fournisseur/modèle ne sont pas transportés.
 
 ---
 
 ## `provenance`
 
-Décrit l’origine et le contexte technique de la mesure sans exposer le contenu brut traité par le système d’IA.
+Décrit la provenance technique de la mesure.
+
+Elle peut contenir :
+
+* la version de mesure ;
+* la version du normalizer ;
+* le nombre de checks produits ;
+* l’identifiant de batch source ;
+* la méthode de canonicalisation.
+
+Cette couche de provenance n’expose pas le contenu conversationnel ou métier brut traité par le système IA.
 
 ---
 
 ## `observation`
 
-Contient les signaux produits par la couche de mesure NeoMundi.
+Contient l’observation de mesure runtime.
 
-Cette section peut notamment contenir :
+Elle inclut :
 
-- des valeurs mesurées ;
-- des limites connues ;
-- le périmètre de la mesure ;
-- les informations nécessaires à l’interprétation du signal.
+* le statut de mesure ;
+* la couverture de mesure ;
+* les valeurs des signaux mesurés ;
+* le statut individuel de chaque signal ;
+* la classification de l’observation ;
+* la confiance ;
+* les limitations ;
+* la frontière de mesure ;
+* le scope runtime.
 
-Une observation NeoMundi est un **signal de mesure**, et non un verdict universel porté sur le système observé.
+Une observation NeoMundi est un **signal de mesure borné**.
+
+Ce n’est pas un verdict universel sur le système observé.
 
 ---
 
 ## `governance`
 
-Contient des informations non contraignantes pouvant servir d’entrée à l’infrastructure consommatrice.
+Contient des informations consultatives non contraignantes qu’un consommateur peut choisir d’utiliser dans sa propre politique.
 
 Une recommandation ou un signal de revue :
 
-- n’est pas une autorisation d’exécution ;
-- ne remplace pas la politique du consommateur ;
-- ne déclenche pas automatiquement une action imposée par NeoMundi.
+* n’est pas une autorisation d’exécution ;
+* ne remplace pas la politique du consommateur ;
+* ne déclenche pas automatiquement une action imposée par NeoMundi.
 
-L’infrastructure destinataire reste responsable de déterminer la signification opérationnelle qu’elle souhaite, ou non, attribuer à cette information.
-
-Sa logique interne de gouvernance n’a pas besoin d’être divulguée à NeoMundi ni rendue publique.
+L’infrastructure qui reçoit le signal décide de la signification opérationnelle qu’elle souhaite lui attribuer.
 
 ---
 
 ## `integrity`
 
-Contient les éléments nécessaires à la vérification indépendante du contrat :
+Contient les éléments nécessaires à une vérification indépendante :
 
-- empreinte SHA-256 du payload ;
-- signature cryptographique Ed25519/JWS ;
-- `key_id`.
+* empreinte SHA-256 du payload ;
+* informations de canonicalisation ;
+* signature cryptographique Ed25519/JWS ;
+* identité du signataire ;
+* `key_id`.
 
 ---
 
-# 2. Frontière de responsabilité
+# 3. Frontière épistémique — RGC v0.2
+
+RGC v0.2 introduit des règles explicites empêchant une mesure d’affirmer davantage que ce qui a réellement été observé.
+
+Le principe central est :
+
+> **L’absence de preuve n’est significative que dans le domaine effectivement mesuré.**
+
+Un contrat doit distinguer :
+
+```text
+MESURÉ + AUCUN SIGNAL
+```
+
+de :
+
+```text
+NON MESURÉ
+COUVERTURE INSUFFISANTE
+```
+
+Un signal non mesuré ne doit jamais être représenté par une valeur numérique artificiellement rassurante.
+
+---
+
+## Statut individuel des signaux
+
+RGC v0.2 introduit des états explicites pour chaque signal :
+
+```text
+measured
+not_measured
+insufficient_coverage
+```
+
+Si un signal est :
+
+```text
+measured
+```
+
+sa valeur doit être numérique.
+
+Si un signal est :
+
+```text
+not_measured
+```
+
+ou :
+
+```text
+insufficient_coverage
+```
+
+sa valeur doit être :
+
+```json
+null
+```
+
+`null` ne doit jamais être interprété comme :
+
+```text
+0.0
+sûr
+normal
+within_bounds
+absence de risque
+```
+
+---
+
+# 4. Couverture de mesure
+
+RGC v0.2 rend normative la relation entre statut de l’observation et couverture de mesure.
+
+```text
+measurement_status = complete
+```
+
+exige :
+
+```text
+measurement_coverage = 1.0
+```
+
+tandis que :
+
+```text
+measurement_status = partial
+```
+
+exige :
+
+```text
+measurement_coverage < 1.0
+```
+
+Une observation partiellement couverte ne peut donc plus être déclarée complète.
+
+La couverture de mesure correspond à la fraction de la **frontière de mesure déclarée** effectivement couverte.
+
+Elle ne doit pas être automatiquement interprétée comme le pourcentage de champs de signaux individuels mesurés.
+
+---
+
+# 5. Signification de `within_bounds`
+
+Dans RGC v0.2 :
+
+```text
+observation_class = within_bounds
+```
+
+signifie :
+
+> Aucun franchissement de seuil applicable n’a été détecté dans le domaine effectivement mesuré.
+
+Cela ne signifie **pas** :
+
+* que toutes les dimensions possibles ont été mesurées ;
+* que le système est globalement sûr ;
+* qu’aucun problème n’existe dans les dimensions non mesurées ;
+* qu’un signal non mesuré équivaut à zéro ;
+* que l’observation constitue une certification de sécurité.
+
+La signification reste explicitement bornée au domaine mesuré.
+
+---
+
+# 6. Signification de `flagged`
+
+Une observation partiellement couverte peut légitimement être :
+
+```text
+observation_class = flagged
+```
+
+lorsqu’un signal effectivement mesuré dans le domaine couvert justifie cette classification.
+
+Une mesure partielle limite donc **la portée de l’inférence**, mais n’empêche pas de rapporter une preuve effectivement observée.
+
+---
+
+# 7. `not_assessed`
+
+RGC v0.2 supporte également :
+
+```text
+observation_class = not_assessed
+```
+
+lorsque les éléments effectivement mesurés sont insuffisants pour soutenir :
+
+```text
+within_bounds
+```
+
+ou :
+
+```text
+flagged
+```
+
+Cela empêche qu’une mesure insuffisante soit silencieusement transformée en classification rassurante.
+
+---
+
+# 8. Frontière temporelle
+
+Un contrat avec :
+
+```text
+runtime_scope = single_request
+```
+
+décrit une observation runtime ponctuelle.
+
+Une observation unique ne peut pas, à elle seule, établir :
+
+* une fréquence ;
+* une persistance ;
+* une récurrence ;
+* une tendance ;
+* un drift.
+
+Ces propriétés nécessitent une comparaison entre plusieurs observations.
+
+Un record `single_request` ne doit donc jamais être interprété comme une preuve d’un comportement temporel qu’il ne mesure pas.
+
+---
+
+# 9. Frontière de responsabilité
 
 L’un des invariants fondamentaux du contrat est :
 
@@ -217,82 +426,93 @@ L’un des invariants fondamentaux du contrat est :
 }
 ```
 
-Cette valeur est imposée par le schéma.
+Une mesure NeoMundi ne peut pas accorder, retirer ou modifier silencieusement une permission d’exécution.
 
-Un contrat affirmant que NeoMundi a modifié silencieusement l’autorisation d’exécution est invalide.
-
-La frontière est donc explicite :
+La séparation est explicite :
 
 ```text
 NeoMundi
     ↓
-mesure
+mesure runtime
     ↓
 signal vérifiable
     ↓
 ────────────────────────────
-      frontière système
+frontière du système
 ────────────────────────────
     ↓
-interprétation du consommateur
+interprétation consommateur
     ↓
-politique du consommateur
+politique consommateur
     ↓
-décision du consommateur
+décision consommateur
     ↓
-action du consommateur
+action consommateur
 ```
 
-NeoMundi n’a pas besoin d’accéder au moteur de politique propriétaire du consommateur, à sa logique de décision ou à son architecture d’exécution.
+NeoMundi n’a pas besoin d’accéder aux éléments propriétaires du consommateur :
 
-Le consommateur peut implémenter ces éléments de manière privée, selon son propre modèle de gouvernance et de sécurité.
+* moteur de politique ;
+* seuils ;
+* logique de routage ;
+* système de décision ;
+* architecture d’enforcement.
+
+Le consommateur conserve ces éléments sous son propre modèle de gouvernance et de sécurité.
 
 ---
 
-# 3. Souveraineté des données
+# 10. Souveraineté des données
 
-Le contrat d’interopérabilité est conçu pour éviter de transporter du contenu brut.
+Le contrat d’interopérabilité est conçu pour éviter le transport de contenu conversationnel ou métier brut.
 
 Il ne contient pas :
 
-- les prompts utilisateurs bruts ;
-- les réponses brutes des modèles ;
-- les identifiants bruts des modèles fournisseurs.
+* de prompts utilisateurs bruts ;
+* de réponses brutes du modèle ;
+* d’identifiants fournisseur/modèle bruts.
 
-Le consommateur peut vérifier ces contraintes avant de stocker ou d’utiliser le contrat.
+Le consommateur peut vérifier indépendamment ces contraintes avant de stocker ou d’utiliser le contrat.
 
-Cette propriété sépare :
+Le contrat ne nécessite pas non plus de révéler :
 
-**la mesure**
+* des politiques propriétaires ;
+* des seuils privés ;
+* des règles de décision ;
+* des mécanismes d’enforcement ;
+* une architecture de gouvernance spécifique au partenaire ;
+* des détails d’implémentation confidentiels.
 
-de
-
-**la donnée métier ou conversationnelle ayant produit cette mesure**.
-
-Le contrat n’exige pas non plus la divulgation de :
-
-- politiques propriétaires du consommateur ;
-- seuils internes ;
-- règles de décision ;
-- mécanismes d’exécution ;
-- architecture de gouvernance propre au partenaire ;
-- détails d’implémentation confidentiels.
-
-L’interopérabilité publique concerne donc **l’interface partagée**, et non la logique interne privée des systèmes participants.
+Le contrat public concerne donc **l’interface partagée**, et non la logique interne privée des systèmes participants.
 
 ---
 
-# 4. Endpoints publics
+# 11. Endpoints publics
 
-## Schéma JSON
+## JSON Schema
 
-Le schéma versionné du contrat est publiquement accessible :
+Le schéma public du contrat peut être récupéré via :
 
 ```bash
 curl https://api.neomundi.io/v1/rgc/schema
 ```
 
-Il permet à un consommateur de vérifier automatiquement qu’un contrat respecte la structure attendue.
+Le dépôt contient également des fichiers de schéma versionnés, notamment :
+
+```text
+schema/contract-v0.1.schema.json
+schema/contract-v0.2.schema.json
+```
+
+Un consommateur doit valider un contrat contre la version exacte du schéma déclarée par :
+
+```text
+identity.schema_version
+```
+
+Un consommateur ne doit jamais interpréter silencieusement un contrat v0.2 avec la sémantique v0.1, ou inversement.
+
+Le mécanisme API précis permettant de récupérer plusieurs versions historiques du schéma doit lui-même être considéré comme un contrat d’API versionné et ne doit pas être supposé tant qu’il n’a pas été publié explicitement.
 
 ---
 
@@ -310,13 +530,13 @@ Le champ :
 integrity.key_id
 ```
 
-identifie la clé publique correspondant à la signature du contrat.
+identifie la clé utilisée pour la vérification.
 
-La récupération du schéma et des clés publiques de vérification ne nécessite pas de clé API NeoMundi.
+Récupérer le schéma et les clés publiques de vérification ne nécessite pas d’accéder au moteur interne de mesure NeoMundi.
 
 ---
 
-# 5. Obtenir un contrat
+# 12. Obtenir un contrat
 
 À partir d’une observation NeoMundi existante :
 
@@ -326,80 +546,131 @@ curl -X POST \
   -H "X-API-Key: YOUR_NEOMUNDI_API_KEY"
 ```
 
-NeoMundi retourne alors un contrat :
+Un contrat de production est attendu comme :
 
-- basé sur JSON ;
-- versionné ;
-- doté d’une empreinte d’intégrité ;
-- signé cryptographiquement.
+* JSON ;
+* versionné ;
+* doté d’une empreinte d’intégrité ;
+* signé cryptographiquement.
 
 ---
 
-# 6. Workflow consommateur
+# 13. Workflow consommateur
 
-Une intégration standard suit cinq étapes.
+Une intégration standard suit les étapes suivantes :
 
 ```text
 1. Recevoir
-2. Valider
-3. Vérifier
-4. Interpréter
-5. Appliquer sa propre politique
+2. Vérifier la version du schéma
+3. Valider
+4. Vérifier les frontières de souveraineté
+5. Vérifier l’intégrité
+6. Interpréter
+7. Appliquer la politique consommateur
+8. Conserver un reçu
 ```
+
+---
 
 ## Étape 1 — Recevoir
 
-Le consommateur reçoit le contrat JSON produit à partir d’une observation NeoMundi.
+Le consommateur reçoit un contrat JSON d’interopérabilité correspondant à une observation NeoMundi.
 
 ---
 
-## Étape 2 — Valider
+## Étape 2 — Vérifier la version du schéma
 
-Le contrat est validé par rapport au schéma JSON public correspondant à sa version.
+Le consommateur vérifie :
 
-Un payload qui ne respecte pas le schéma doit être rejeté avant utilisation.
+```text
+contract.identity.schema_version == schema.version
+```
+
+Une différence de version doit conduire au rejet avant interprétation.
 
 ---
 
-## Étape 3 — Vérifier
+## Étape 3 — Valider
+
+Le contrat est validé contre le JSON Schema correspondant.
+
+Avec v0.2, la validation peut imposer :
+
+* la cohérence entre `complete` et une couverture totale ;
+* la cohérence entre `partial` et une couverture incomplète ;
+* le statut individuel des signaux ;
+* des valeurs numériques uniquement pour les signaux réellement mesurés ;
+* `null` pour les signaux non mesurés ou insuffisamment couverts.
+
+---
+
+## Étape 4 — Vérifier les contraintes de souveraineté
+
+Le consommateur contrôle indépendamment l’absence de contenu brut interdit ainsi que le respect de la frontière d’autorité d’exécution.
+
+---
+
+## Étape 5 — Vérifier l’intégrité
 
 Le consommateur vérifie indépendamment :
 
-- l’empreinte SHA-256 ;
-- la signature Ed25519/JWS ;
-- la clé de signature utilisée pour le contrat.
+* l’empreinte SHA-256 ;
+* la signature Ed25519/JWS ;
+* la clé de vérification ;
+* les claims signées.
+
+Le vérificateur de référence contrôle les claims suivantes :
+
+```text
+payload_hash
+hash_algorithm
+schema_version
+request_id
+timestamp
+```
+
+Le `kid` du JWS, lorsqu’il est présent, doit correspondre à :
+
+```text
+integrity.key_id
+```
 
 ---
 
-## Étape 4 — Interpréter
+## Étape 6 — Interpréter
 
-L’infrastructure lit les signaux de mesure, leurs limites et les éventuelles informations consultatives transportées par le contrat.
+L’infrastructure lit :
 
-Leur signification opérationnelle dépend du propre contexte du consommateur.
+* les valeurs mesurées ;
+* le statut de chaque signal ;
+* la couverture de mesure ;
+* les limitations ;
+* la frontière de mesure ;
+* les informations consultatives.
 
-NeoMundi ne prescrit pas la manière dont le consommateur doit interpréter un signal de mesure valide.
+L’interprétation doit rester bornée au domaine effectivement mesuré.
 
 ---
 
-## Étape 5 — Appliquer sa propre politique
+## Étape 7 — Appliquer la politique consommateur
 
-Le consommateur détermine l’action appropriée.
+Le consommateur détermine l’action adaptée.
 
-Exemple :
+Par exemple :
 
 ```text
 review_recommendation = required
             ↓
-      pause du workflow
+       suspendre le flux
             ↓
-       revue humaine
+        revue humaine
 ```
 
-Il s’agit uniquement d’un **exemple de politique consommateur**.
+Il s’agit d’un **exemple de politique définie par le consommateur**.
 
-Cette politique n’est pas imposée par NeoMundi.
+Elle n’est pas imposée par NeoMundi.
 
-Une autre infrastructure pourrait choisir :
+Une autre infrastructure peut choisir :
 
 ```text
 signal
@@ -412,7 +683,7 @@ ou :
 ```text
 signal
     ↓
-monitoring renforcé
+surveillance renforcée
 ```
 
 ou :
@@ -420,129 +691,158 @@ ou :
 ```text
 signal
     ↓
-routage vers un autre système
+reroutage
 ```
 
-Le contrat reste identique.
+Le contrat reste l’interface de mesure.
 
 La politique appartient au consommateur.
 
-La politique exacte, les seuils, la logique de routage et les mécanismes d’exécution peuvent rester entièrement propriétaires et confidentiels.
+---
+
+## Étape 8 — Conserver un reçu auditable
+
+Un consommateur peut conserver :
+
+* l’identifiant de requête ;
+* la version de schéma ;
+* le payload hash ;
+* la clé de vérification ;
+* le résultat de vérification d’intégrité ;
+* le résultat de vérification de signature ;
+* la décision de routage consommateur ;
+* la justification de cette décision ;
+* l’horodatage du traitement ;
+* le contrat complet reçu.
+
+Cela préserve une trace auditable et versionnée.
 
 ---
 
-# 7. Consommateur de référence
+# 14. Consommateur de référence
 
-NeoMundi fournit une implémentation de référence montrant comment un système indépendant peut traiter un contrat.
+NeoMundi fournit un consommateur de référence indépendant montrant comment un système tiers peut traiter un contrat.
 
 Le flux de référence est :
 
 ```text
 contrat
     ↓
+vérification de version du schéma
+    ↓
 validation JSON Schema
+    ↓
+contrôles de souveraineté
     ↓
 vérification SHA-256
     ↓
-vérification Ed25519/JWS
-    ↓
-contrôle des contraintes de souveraineté
+vérification Ed25519/JWS + claims signées
     ↓
 politique définie par le consommateur
     ↓
 reçu auditable
 ```
 
-Cette implémentation est volontairement indépendante du code producteur de NeoMundi.
+L’implémentation de référence est indépendante du code producteur NeoMundi.
 
-Elle ne nécessite pas d’importer les composants internes ayant généré la mesure.
+Elle ne reproduit pas le moteur interne de mesure.
 
-Le consommateur de référence illustre uniquement un **exemple générique** de la manière dont une infrastructure destinataire peut valider, vérifier et consommer un contrat NeoMundi.
+Elle démontre uniquement un pattern générique d’interopérabilité.
 
-Il ne définit, ne reproduit et n’exige la divulgation d’aucun élément propriétaire d’un partenaire, notamment :
+Un partenaire peut conserver entièrement privés :
 
-- logique d’interprétation ;
-- moteur de politique ;
-- seuils ;
-- logique de décision ;
-- architecture de gouvernance ;
-- mécanismes de routage ;
-- mécanismes d’exécution.
+* sa logique d’interprétation ;
+* son moteur de politique ;
+* ses seuils ;
+* sa logique de décision ;
+* ses mécanismes de routage ;
+* ses mécanismes d’enforcement ;
+* son architecture de gouvernance ;
+* sa propriété intellectuelle.
 
-Un partenaire peut donc utiliser le contrat public d’interopérabilité tout en conservant son implémentation entièrement privée.
+Voir :
 
-### Frontière d’interopérabilité
-
-```text
-PUBLIC
-contrat NeoMundi
-schéma
-règles de vérification
-clés publiques
-modèle générique de consommation
-
-PRIVÉ / DIVULGATION OPTIONNELLE
-politique partenaire
-seuils partenaire
-logique de décision partenaire
-mécanismes d’exécution partenaire
-architecture partenaire
-propriété intellectuelle partenaire
-```
-
-Le consommateur de référence public constitue un exemple d’interopérabilité, **et non un modèle imposant aux partenaires de révéler la manière dont leurs systèmes gouvernent ou agissent**.
+[Consommateur de référence](./consumer-reference/README.md)
 
 ---
 
-## Démonstration hors ligne
+# 15. Démonstration historique v0.1 hors ligne
 
-Le consommateur de référence peut être exécuté sans serveur NeoMundi actif.
+La démonstration hors ligne existante utilise les observations signées RGC v0.1 originales.
 
-Depuis le répertoire `consumer-reference/` :
+Depuis :
+
+```text
+consumer-reference/
+```
+
+exécuter :
 
 ```bash
 python -m pip install -r requirements.txt
 python -m rgc_consumer_demo.cli --offline
 ```
 
-La démonstration hors ligne utilise :
+La démonstration historique utilise :
 
-- deux contrats NeoMundi réels et signés provenant de `../examples/` ;
-- le schéma public du contrat situé dans `../schema/contract-v0.1.schema.json` ;
-- le JWKS public NeoMundi stocké localement dans `rgc_consumer_demo/fixtures/public_jwks.json`.
+* deux contrats v0.1 signés depuis `../examples/` ;
+* `../schema/contract-v0.1.schema.json` ;
+* le JWKS public local.
 
-Aucune clé API NeoMundi n’est requise.
-
-Aucune clé privée de signature n’est incluse.
-
-Le JWKS local contient uniquement la clé publique nécessaire à la vérification indépendante des signatures Ed25519/JWS des contrats d’exemple publiés.
-
-Résultat attendu pour les deux contrats :
+Résultat historique attendu :
 
 ```text
 hash_match=True
 signature_valid=True
 ```
 
-Voir la [documentation complète du consommateur de référence](./consumer-reference/README.md).
+Les exemples v0.1 signés sont conservés inchangés pour assurer leur reproductibilité.
+
+Ils ne doivent pas être réécrits rétrospectivement pour satisfaire v0.2, car cela invaliderait leurs payload hashes et leurs signatures d’origine.
 
 ---
 
-## Consommer un contrat réel
+# 16. Fixtures RGC v0.2
 
-```bash
-python -m rgc_consumer_demo.cli \
-  --base-url https://api.neomundi.io \
-  --contract-file my_contract.json
+Les fixtures illustratives v0.2 sont stockées dans :
+
+```text
+examples/fixtures/
 ```
 
-Le consommateur peut également utiliser un schéma et un JWKS déjà récupérés ou mis en cache afin d’éviter une requête réseau à chaque contrat.
+Elles montrent les sémantiques corrigées, par exemple :
+
+```text
+mesure partielle
++
+signaux mesurés
++
+signaux not_measured
++
+insufficient_coverage
+```
+
+ainsi que :
+
+```text
+mesure partielle
++
+preuve flagged dans le domaine mesuré
+```
+
+Ces fixtures illustrent le schéma et sa sémantique.
+
+Tant qu’elles n’ont pas été explicitement générées et signées par le producteur canonique NeoMundi, elles ne doivent pas être présentées comme des observations NeoMundi live cryptographiquement valides.
+
+Les observations v0.2 de production devront être générées, hashées et signées par le producteur canonique.
 
 ---
 
-# 8. Standards utilisés
+# 17. Standards utilisés
 
-NeoMundi réutilise des standards établis plutôt que de créer des équivalents propriétaires.
+NeoMundi réutilise des standards existants lorsque cela est pertinent.
+
+---
 
 ## JSON Schema
 
@@ -550,15 +850,15 @@ Le contrat utilise :
 
 **JSON Schema Draft 2020-12**
 
-Le schéma permet une validation automatique et versionnée des payloads.
+Le schéma fournit une validation structurelle et sémantique lisible par machine.
 
 ---
 
 ## W3C Trace Context
 
-La corrélation entre systèmes repose sur un identifiant de trace compatible avec la forme définie par **W3C Trace Context**.
+La corrélation inter-systèmes utilise un identifiant de trace compatible avec la forme définie par **W3C Trace Context**.
 
-Cela permet de corréler une observation NeoMundi avec d’autres traces techniques sans remplacer les propres mécanismes de tracing du consommateur.
+Cela permet la corrélation avec des systèmes de tracing externes sans remplacer leurs propres mécanismes internes.
 
 ---
 
@@ -566,9 +866,9 @@ Cela permet de corréler une observation NeoMundi avec d’autres traces techniq
 
 Une représentation JSON canonique est utilisée pour calculer une empreinte SHA-256 du payload.
 
-Cette empreinte permet de détecter toute modification du contenu.
+Cette empreinte permet de détecter une modification du contenu.
 
-Elle ne doit pas être confondue avec une signature cryptographique.
+Elle ne doit pas être confondue avec la signature elle-même.
 
 ---
 
@@ -576,32 +876,32 @@ Elle ne doit pas être confondue avec une signature cryptographique.
 
 Le contrat utilise :
 
-- **JSON Web Signature — RFC 7515** ;
-- **Ed25519** ;
-- une représentation de clé publique au format **JWK**.
+* **JSON Web Signature — RFC 7515** ;
+* **Ed25519** ;
+* la représentation de clé publique au format **JWK**.
 
-La signature permet au consommateur de vérifier cryptographiquement l’origine et l’intégrité du contrat.
+La signature permet la vérification indépendante de l’origine et de l’intégrité.
 
 ---
 
 ## CloudEvents
 
-La structure réutilise certains principes généraux de CloudEvents relatifs à :
+La structure reprend certains principes généraux de CloudEvents relatifs à :
 
-- l’identité ;
-- la source ;
-- le temps ;
-- le type d’événement.
+* l’identité ;
+* la source ;
+* le temps ;
+* le type d’événement.
 
-Le contrat conserve néanmoins ses propres noms de champs spécifiques à NeoMundi.
+Le contrat conserve néanmoins des noms de champs spécifiques à NeoMundi.
 
-**NeoMundi ne revendique pas une conformité complète à l’enveloppe CloudEvents.**
+**NeoMundi ne revendique pas une conformité complète avec l’enveloppe CloudEvents.**
 
 ---
 
-# 9. Modèle d’intégrité
+# 18. Modèle d’intégrité
 
-Un contrat valide nécessite simultanément :
+Un contrat de production valide nécessite à la fois :
 
 ```text
 empreinte SHA-256
@@ -609,136 +909,183 @@ empreinte SHA-256
 signature Ed25519/JWS
 ```
 
-Il n’existe pas de mode de repli valide reposant uniquement sur le hash.
+Il n’existe pas de mode valide reposant uniquement sur le hash.
 
-Si la signature cryptographique ne peut pas être produite, aucun contrat signé valide ne doit être émis.
+Si la signature cryptographique requise ne peut pas être produite, un contrat signé valide ne doit pas être émis.
+
+Les métadonnées signées incluent :
+
+```text
+payload_hash
+hash_algorithm
+schema_version
+request_id
+timestamp
+```
+
+Un consommateur doit vérifier à la fois la validité cryptographique et la cohérence de ces claims avec le contrat reçu.
 
 ---
 
-# 10. Versionnement
+# 19. Versioning
 
 Le format du contrat est explicitement versionné.
 
-Version pilote actuelle :
+## RGC v0.1
 
-```text
-v0.1
-```
+RGC v0.1 reste disponible pour :
 
-Un consommateur doit vérifier la version du schéma avant de traiter automatiquement un contrat.
+* la reproductibilité historique ;
+* la vérification des observations signées existantes ;
+* la compatibilité avec les artefacts pilotes existants.
 
-Les versions futures pourront faire évoluer le format tout en gardant ces changements explicites pour les infrastructures l’ayant déjà intégré.
+Les observations v0.1 signées restent inchangées.
+
+Leur sémantique historique est conservée telle qu’elle existait.
 
 ---
 
-# 11. Ce que ce contrat ne fait pas
+## RGC v0.2
+
+RGC v0.2 introduit des corrections sémantiques concernant :
+
+* les mesures partielles ;
+* le statut individuel des signaux ;
+* les valeurs `null` pour les signaux non mesurés ;
+* l’interprétation bornée au domaine mesuré ;
+* la cohérence entre couverture et statut de mesure ;
+* les limites temporelles explicites des observations `single_request`.
+
+Invariant central :
+
+> **L’absence de preuve n’est significative que dans le domaine effectivement mesuré.**
+
+RGC v0.2 est introduit comme une nouvelle version plutôt que comme une réécriture silencieuse de v0.1.
+
+Cela préserve :
+
+* la reproductibilité historique ;
+* la falsifiabilité ;
+* l’intégrité cryptographique ;
+* l’évolution explicite du protocole.
+
+---
+
+# 20. Ce que ce contrat ne fait pas
 
 Le NeoMundi Measurement Interoperability Contract ne :
 
-- donne pas d’autorisation d’exécution ;
-- ne remplace pas le moteur de politique du consommateur ;
-- ne décide pas au nom d’une infrastructure tierce ;
-- ne certifie pas les données de tiers ;
-- n’exige pas d’accès au code interne de NeoMundi ;
-- ne transporte pas les prompts ou réponses bruts ;
-- n’impose pas une règle unique de routage ;
-- ne transforme pas un signal de mesure en vérité opérationnelle universelle ;
-- n’exige pas la divulgation de l’implémentation propriétaire d’un partenaire ;
-- n’exige pas la divulgation de seuils internes ou de règles de politique ;
-- n’exige pas la publication de la logique de décision ou d’exécution ;
-- ne transfère pas la propriété ni le contrôle de la propriété intellectuelle d’un partenaire.
+* donne pas d’autorisation d’exécution ;
+* ne révoque pas d’autorisation d’exécution ;
+* ne remplace pas le moteur de politique du consommateur ;
+* ne décide pas à la place d’une infrastructure tierce ;
+* ne certifie pas des données tierces ;
+* ne certifie pas qu’un système IA est globalement sûr ;
+* ne produit pas de conclusion au-delà du domaine effectivement mesuré ;
+* ne transforme pas une absence de mesure en valeur rassurante ;
+* n’infère pas un drift à partir d’une seule observation ;
+* n’exige pas l’accès au code interne NeoMundi ;
+* ne révèle pas les formules internes de mesure ;
+* ne transporte pas les prompts ou réponses bruts ;
+* n’impose pas une politique de routage universelle ;
+* n’exige pas la divulgation des politiques du partenaire ;
+* n’exige pas la divulgation des seuils du partenaire ;
+* n’exige pas la publication de la logique de décision ou d’enforcement ;
+* ne transfère ni le contrôle ni la propriété de la propriété intellectuelle du partenaire.
 
-Il constitue une **interface vérifiable entre la mesure et les systèmes qui consomment cette mesure**.
-
-L’interface peut être publique tandis que les implémentations de part et d’autre restent privées.
+Il constitue une **interface vérifiable entre la mesure runtime et les systèmes qui consomment cette mesure**.
 
 ---
 
-# 12. Exemple d’intégration
+# 21. Pattern d’intégration
 
-Le même contrat peut être utilisé différemment selon l’infrastructure qui le reçoit.
+La même primitive de mesure peut être utilisée par plusieurs infrastructures :
 
 ```text
                     NeoMundi
                        ↓
-                mesure runtime
+                 mesure runtime
                        ↓
-            contrat interopérable
+             contrat interopérable
                        ↓
         ┌──────────────┼──────────────┐
         ↓              ↓              ↓
- Observabilité      Gouvernance      Audit
+ Observabilité     Gouvernance       Audit
         ↓              ↓              ↓
- journalisation      politique     conservation
+ journalisation      politique      rétention
         ↓              ↓              ↓
-    analyse           action         preuve
+    analyse           action        preuve
 ```
 
-La couche de mesure reste identique.
+La couche de mesure reste la même.
 
 Les applications peuvent être multiples.
 
-Chaque infrastructure consommatrice reste libre d’implémenter sa propre logique aval sans avoir à l’exposer publiquement.
+Chaque infrastructure consommatrice conserve sa propre implémentation aval.
 
 ---
 
-# 13. Interface publique, implémentation privée
+# 22. Interface publique, implémentation privée
 
-NeoMundi sépare volontairement **l’interopérabilité** de **la divulgation de l’implémentation**.
+NeoMundi sépare volontairement **interopérabilité** et **divulgation de l’implémentation**.
 
 La couche publique peut inclure :
 
-- la structure du contrat ;
-- la sémantique des champs ;
-- les règles de versionnement ;
-- les règles de validation ;
-- les mécanismes de vérification ;
-- les clés publiques de vérification ;
-- des payloads d’exemple synthétiques ou approuvés ;
-- le comportement générique d’un consommateur de référence.
+* la structure du contrat ;
+* la sémantique des champs ;
+* les règles de versioning ;
+* les règles de validation ;
+* les mécanismes de vérification ;
+* les clés publiques de vérification ;
+* les exemples approuvés ;
+* les fixtures illustratives ;
+* le comportement générique du consommateur de référence.
 
 La couche privée peut inclure :
 
-- la logique propriétaire de gouvernance ;
-- les moteurs internes de politique ;
-- les seuils ;
-- les règles de décision ;
-- les stratégies de routage ;
-- les mécanismes d’exécution ;
-- l’architecture confidentielle ;
-- les intégrations spécifiques aux partenaires ;
-- la propriété intellectuelle non publiée.
+* l’implémentation interne de la mesure NeoMundi ;
+* la logique propriétaire de gouvernance ;
+* les moteurs de politique des consommateurs ;
+* les seuils ;
+* les règles de décision ;
+* les stratégies de routage ;
+* les mécanismes d’enforcement ;
+* les architectures confidentielles des partenaires ;
+* la propriété intellectuelle non publiée.
 
-Cette séparation permet à des systèmes indépendants d’interopérer sans obliger NeoMundi ni ses partenaires à exposer leur mécanique interne.
+Cette séparation permet à des systèmes indépendants d’interopérer sans obliger l’une ou l’autre partie à exposer son fonctionnement interne.
 
 **Interface ouverte. Implémentation indépendante.**
 
 ---
 
-# 14. Statut
+# 23. Statut
 
-Le contrat est actuellement :
+Le contrat d’interopérabilité contient actuellement :
 
 ```text
-Version pilote — v0.1
+RGC v0.1 — contrat pilote historique signé
+RGC v0.2 — sémantique d’interopérabilité corrigée et versionnée
 ```
 
-Le format peut encore évoluer.
+Le format peut continuer à évoluer.
 
-Toute évolution destinée à une consommation automatisée doit rester explicitement versionnée.
+Toute évolution destinée à une consommation automatique doit rester explicitement versionnée.
+
+Les artefacts historiques signés doivent rester immuables.
 
 ---
 
 ## NeoMundi
 
-**Couche fondamentale de mesure runtime pour les systèmes d’IA.**
+**Couche fondamentale de mesure runtime pour les systèmes IA.**
 
-Une couche de mesure. Plusieurs applications. Plusieurs infrastructures.
+Une primitive de mesure. Plusieurs applications. Plusieurs infrastructures.
 
-**NeoMundi fournit le signal. Vous gardez le contrôle.**
+**NeoMundi fournit le signal. Vous conservez le contrôle.**
 
 ---
 
 © 2026 NeoMundi / Louis M Sàrl — Tous droits réservés.
 
-Une licence open source est prévue pour une version future.
+Une licence open source est prévue pour une prochaine version.
