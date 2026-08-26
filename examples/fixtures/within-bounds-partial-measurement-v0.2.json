@@ -1,0 +1,75 @@
+{
+  "identity": {
+    "schema_version": "0.2.0",
+    "request_id": "c735fe2c-b88f-488a-ab27-aa456e43a556",
+    "trace_id": "00-149519e750f0b7e901942da66c9f4693-53f5b5783400c854-01",
+    "timestamp": "2026-08-17T21:04:45.245605Z",
+    "system_id": "controltower-api",
+    "model": "local",
+    "mode": "OBS"
+  },
+  "provenance": {
+    "measurement_version": "3.0.0",
+    "normalizer_version": "1.0.0",
+    "checks_emitted": 3,
+    "source_batch_id": null,
+    "canonicalization_method": "sorted-json-utf8"
+  },
+  "observation": {
+    "runtime_scope": "single_request",
+    "observation_window": null,
+    "measurement_status": "partial",
+    "measurement_coverage": 0.6,
+    "observed_signals": {
+      "stability_score": 0.923077,
+      "coherence_score": 1.0,
+      "factual_hallucination_score": null,
+      "semantic_instability_score": 0.0,
+      "semantic_risk": null,
+      "signal_status": {
+        "stability_score": "measured",
+        "coherence_score": "measured",
+        "factual_hallucination_score": "not_measured",
+        "semantic_instability_score": "measured",
+        "semantic_risk": "insufficient_coverage"
+      },
+      "observation_class": "within_bounds",
+      "confidence": 1.0
+    },
+    "limitations": [
+      "Measurement coverage is partial: 60% of the declared measurement boundary was covered.",
+      "factual_hallucination_score was not measured and MUST NOT be interpreted as 0.0 or as evidence of factual safety.",
+      "semantic_risk was not validly established because available coverage was insufficient.",
+      "within_bounds applies only to the measured domain and makes no claim about unmeasured dimensions.",
+      "This single_request observation cannot by itself establish frequency, persistence, recurrence, trend, or drift.",
+      "The governance signal is advisory only — it does not grant, refuse, suspend, or modify any execution permission.",
+      "Provider/model identity is pseudonymized in this contract and cannot be reversed to the original value."
+    ],
+    "measurement_boundary": "This contract reports only measurements actually produced within the observed runtime domain. Absence of evidence is only meaningful over the measured domain. No conclusion may be inferred for signals marked not_measured or insufficient_coverage. Because runtime_scope is single_request, this record alone cannot establish frequency, persistence, recurrence, trend, or drift. This contract does not evaluate ground truth, does not certify third-party data, and carries no execution authority."
+  },
+  "governance": {
+    "governance_boundary": {
+      "authorization_status": "not_applicable",
+      "execution_permission_changed": false
+    },
+    "advisory": {
+      "review_recommendation": "not_indicated",
+      "review_trigger": [],
+      "recommended_review_type": [],
+      "interpretation_policy": {
+        "policy_id": "rgc-piste-b-advisory",
+        "policy_version": "0.2.0"
+      }
+    }
+  },
+  "integrity": {
+    "payload_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash_algorithm": "sha256",
+    "canonicalization": "sorted-json-utf8",
+    "signature": "illustrative.fixture.not-signed",
+    "signer_identity": "illustrative-fixture",
+    "key_id": "illustrative-fixture",
+    "confidentiality_class": "controlled",
+    "retention_reference": "governance_logs:c735fe2c-b88f-488a-ab27-aa456e43a556"
+  }
+}
