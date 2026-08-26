@@ -1,0 +1,81 @@
+{
+  "identity": {
+    "schema_version": "0.2.0",
+    "request_id": "3d55da6a-8170-4480-a435-b0af0583a9fe",
+    "trace_id": "00-3ff43f4daeaa44efce938d816566a094-278bf1314051a6df-01",
+    "timestamp": "2026-08-17T16:43:47.547079Z",
+    "system_id": "controltower-api",
+    "model": "local",
+    "mode": "OBS"
+  },
+  "provenance": {
+    "measurement_version": "3.0.0",
+    "normalizer_version": "1.0.0",
+    "checks_emitted": 3,
+    "source_batch_id": null,
+    "canonicalization_method": "sorted-json-utf8"
+  },
+  "observation": {
+    "runtime_scope": "single_request",
+    "observation_window": null,
+    "measurement_status": "partial",
+    "measurement_coverage": 0.6,
+    "observed_signals": {
+      "stability_score": 0.615385,
+      "coherence_score": 1.0,
+      "factual_hallucination_score": 1.0,
+      "semantic_instability_score": 0.0,
+      "semantic_risk": 0.0,
+      "signal_status": {
+        "stability_score": "measured",
+        "coherence_score": "measured",
+        "factual_hallucination_score": "measured",
+        "semantic_instability_score": "measured",
+        "semantic_risk": "measured"
+      },
+      "observation_class": "flagged",
+      "confidence": 1.0
+    },
+    "limitations": [
+      "Measurement coverage is partial: 60% of the declared measurement boundary was covered.",
+      "The flagged classification applies only to evidence actually measured within the covered domain and does not characterize unmeasured dimensions.",
+      "This single_request observation cannot by itself establish frequency, persistence, recurrence, trend, or drift.",
+      "Measurement reflects a single runtime observation window; it is not a certification of third-party content.",
+      "The governance signal is advisory only — it does not grant, refuse, suspend, or modify any execution permission.",
+      "Provider/model identity is pseudonymized in this contract and cannot be reversed to the original value."
+    ],
+    "measurement_boundary": "This contract reports measurements produced within a partially covered runtime domain. The flagged classification is supported by evidence detected within that measured domain and makes no claim about unmeasured dimensions. Absence of evidence is only meaningful over the measured domain. Because runtime_scope is single_request, this record alone cannot establish frequency, persistence, recurrence, trend, or drift. This contract does not certify third-party data and carries no execution authority."
+  },
+  "governance": {
+    "governance_boundary": {
+      "authorization_status": "not_applicable",
+      "execution_permission_changed": false
+    },
+    "advisory": {
+      "review_recommendation": "required",
+      "review_trigger": [
+        "contradiction",
+        "overclaim",
+        "factual_risk"
+      ],
+      "recommended_review_type": [
+        "independent_evidence_review",
+        "human_validation"
+      ],
+      "interpretation_policy": {
+        "policy_id": "rgc-piste-b-advisory",
+        "policy_version": "0.2.0"
+      }
+    }
+  },
+  "integrity": {
+    "payload_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash_algorithm": "sha256",
+    "canonicalization": "sorted-json-utf8",
+    "signature": "illustrative.fixture.not-signed",
+    "signer_identity": "illustrative-fixture",
+    "key_id": "illustrative-fixture",
+    "confidentiality_class": "controlled",
+    "retention_reference": "governance_logs:3d55da6a-8170-4480-a435-b0af0583a9fe"
+  }
+}
