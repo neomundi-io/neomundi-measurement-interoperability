@@ -6,13 +6,26 @@ review_recommendation = required -> pause + escalate)."
 
 This is an EXAMPLE of the CONSUMER's own business rule — theirs to define.
 NeoMundi measures; it does not decide what a consumer does with the
-measurement, and does not mandate this policy. This module is a worked
-example proving the contract carries enough information for such a rule to
-be written — not a rule NeoMundi imposes on every consumer.
+measurement, and does not mandate this policy.
 
-Crucially: this function only ever reads `governance.advisory` (a
-recommendation) — it never touches, and cannot touch,
-`governance_boundary.execution_permission_changed`.
+This module demonstrates that the interoperability contract carries enough
+information for a consumer-defined action policy to be implemented without
+granting NeoMundi execution authority.
+
+Epistemic boundary:
+
+- a routing decision is not a statement that the AI system is safe;
+- `not_indicated` means only that this consumer policy does not indicate
+  review for this observation;
+- it does not mean that every possible dimension was measured;
+- it does not turn absence of evidence outside the measured domain into
+  evidence of absence;
+- temporal properties such as persistence, recurrence, trend or drift cannot
+  be inferred from a single_request record alone.
+
+Crucially, this function reads only `governance.advisory`, which is a
+non-binding recommendation. It never changes or derives execution authority
+from `governance.governance_boundary.execution_permission_changed`.
 """
 
 from __future__ import annotations
@@ -37,11 +50,17 @@ class RoutingDecision:
 
 
 def route(contract: dict[str, Any]) -> RoutingDecision:
-    """Example consumer policy only — not a rule imposed by NeoMundi.
+    """Apply one example consumer-defined routing policy.
 
-    A real consumer is free to implement any policy of their own; this one
-    is provided purely to demonstrate that the contract carries enough
-    information to support such a decision.
+    This function intentionally does not reinterpret NeoMundi measurement
+    scores or create new measurement conclusions.
+
+    It consumes only the advisory recommendation already present in the
+    contract and maps that recommendation to an example consumer action.
+
+    The resulting action must not be interpreted as a NeoMundi authorization
+    decision, certification, safety determination, or statement about
+    unmeasured dimensions.
     """
     advisory = contract["governance"]["advisory"]
     recommendation = advisory["review_recommendation"]
@@ -50,20 +69,38 @@ def route(contract: dict[str, Any]) -> RoutingDecision:
     if recommendation == "required":
         return RoutingDecision(
             action=RoutingAction.PAUSE_AND_ESCALATE,
-            reason="review_recommendation=required -> pausing pending human review, per example consumer policy.",
+            reason=(
+                "review_recommendation=required -> pausing pending human "
+                "review under this example consumer-defined policy. "
+                "This action does not alter NeoMundi's measurement boundary "
+                "or constitute a NeoMundi execution decision."
+            ),
             review_recommendation=recommendation,
             review_trigger=trigger,
         )
+
     if recommendation == "recommended":
         return RoutingDecision(
             action=RoutingAction.FLAG_FOR_REVIEW,
-            reason="review_recommendation=recommended -> flagged for asynchronous review, execution continues.",
+            reason=(
+                "review_recommendation=recommended -> flagged for "
+                "asynchronous review under this example consumer-defined "
+                "policy; execution continues. This does not imply any "
+                "conclusion beyond the measured domain."
+            ),
             review_recommendation=recommendation,
             review_trigger=trigger,
         )
+
     return RoutingDecision(
         action=RoutingAction.PROCEED,
-        reason="review_recommendation=not_indicated -> no review signal, proceeding.",
+        reason=(
+            "review_recommendation=not_indicated -> this example consumer "
+            "policy does not indicate review for this observation, so it "
+            "proceeds. This is not a safety certification, does not imply "
+            "complete measurement, and makes no claim about unmeasured "
+            "dimensions."
+        ),
         review_recommendation=recommendation,
         review_trigger=trigger,
     )
