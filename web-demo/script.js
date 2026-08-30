@@ -5,11 +5,99 @@
   if (!root) return;
 
   let currentExampleKey = "flagged";
+  let currentLang = "en";
+
+  /* ---------- i18n ---------- */
+
+  function t(path) {
+    const parts = path.split(".");
+    let node = STRINGS[currentLang];
+    for (const p of parts) {
+      if (node == null) break;
+      node = node[p];
+    }
+    return node == null ? "" : node;
+  }
+
+  function applyStaticI18n() {
+    root.querySelectorAll("[data-i18n]").forEach((el) => {
+      const value = t(el.dataset.i18n);
+      if (el.dataset.i18nHtml !== undefined) el.innerHTML = value;
+      else el.textContent = value;
+    });
+
+    // A few aria-labels that aren't plain text nodes.
+    const ariaMap = [
+      [".nm-interop-flow", "flow.ariaLabel"],
+      [".nm-interop-flow-boundary", "flow.boundaryAria"],
+      [".nm-interop-example-toggle", "contract.exampleAria"],
+      [".nm-interop-legend", "contract.sectionsAria"],
+      [".nm-interop-tabs", "verify.tabsAria"],
+    ];
+    ariaMap.forEach(([selector, key]) => {
+      const el = root.querySelector(selector);
+      if (el) el.setAttribute("aria-label", t(key));
+    });
+
+    document.documentElement.lang = currentLang;
+  }
+
+  function updateLegendBlurb() {
+    const blurb = document.getElementById("nm-interop-legend-blurb");
+    if (!blurb) return;
+    blurb.textContent = activeSection ? t(`sections.${activeSection}.blurb`) : t("contract.legendDefault");
+  }
+
+  function wireLangToggle() {
+    const buttons = root.querySelectorAll(".nm-interop-lang-btn");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.lang === currentLang) return;
+        currentLang = btn.dataset.lang;
+        buttons.forEach((b) => b.classList.toggle("is-active", b === btn));
+        applyStaticI18n();
+        updateLegendBlurb();
+        runAndRenderVerification();
+        try {
+          localStorage.setItem("nm-interop-lang", currentLang);
+        } catch (e) {
+          /* private mode / storage blocked — language just won't persist */
+        }
+      });
+    });
+  }
+
+  function initLang() {
+    let saved = null;
+    try {
+      saved = localStorage.getItem("nm-interop-lang");
+    } catch (e) {
+      /* ignore */
+    }
+    if (saved === "en" || saved === "fr") currentLang = saved;
+    const buttons = root.querySelectorAll(".nm-interop-lang-btn");
+    buttons.forEach((b) => b.classList.toggle("is-active", b.dataset.lang === currentLang));
+    applyStaticI18n();
+  }
 
   /* ---------- JSON rendering (left panel) ---------- */
 
-  function escapeHtml(s) {
+  function escapeAngleAmp(s) {
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Classic JSON tokenizer for syntax highlighting. Runs on text that has
+  // already had &, <, > escaped — quotes are left literal on purpose so
+  // this regex can still find string/key boundaries.
+  function syntaxHighlight(escaped) {
+    const pattern = /("(?:\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\btrue\b|\bfalse\b|\bnull\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g;
+    return escaped.replace(pattern, (match) => {
+      let cls = "tok-num";
+      if (/^"/.test(match)) cls = /:\s*$/.test(match) ? "tok-key" : "tok-str";
+      else if (/true|false/.test(match)) cls = "tok-bool";
+      else if (/null/.test(match)) cls = "tok-null";
+      return `<span class="${cls}">${match}</span>`;
+    });
   }
 
   const SECTION_ORDER = ["identity", "provenance", "observation", "governance", "integrity"];
@@ -20,7 +108,8 @@
       const indented = json.split("\n").map((line, i) => (i === 0 ? line : "  " + line)).join("\n");
       const body = `  "${key}": ${indented}`;
       const comma = idx < SECTION_ORDER.length - 1 ? "," : "";
-      return `<span class="nm-interop-section-block" data-section="${key}">${escapeHtml(body)}</span>${comma}`;
+      const highlighted = syntaxHighlight(escapeAngleAmp(body));
+      return `<span class="nm-interop-section-block" data-section="${key}">${highlighted}</span>${comma}`;
     });
     return "{\n" + parts.join("\n") + "\n}";
   }
@@ -42,16 +131,13 @@
 
   function wireLegend() {
     const buttons = root.querySelectorAll(".nm-interop-legend-btn");
-    const blurb = document.getElementById("nm-interop-legend-blurb");
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const section = btn.dataset.section;
         const isSame = activeSection === section;
         activeSection = isSame ? null : section;
         buttons.forEach((b) => b.classList.toggle("is-active", b.dataset.section === activeSection));
-        blurb.textContent = activeSection
-          ? SECTION_INFO[activeSection].blurb
-          : "Select a section above to see what it's for.";
+        updateLegendBlurb();
         applySectionHighlight();
       });
     });
@@ -75,9 +161,9 @@
     const tabs = root.querySelectorAll(".nm-interop-tab");
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
-        tabs.forEach((t) => {
-          t.classList.toggle("is-active", t === tab);
-          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        tabs.forEach((t2) => {
+          t2.classList.toggle("is-active", t2 === tab);
+          t2.setAttribute("aria-selected", t2 === tab ? "true" : "false");
         });
         root.querySelectorAll(".nm-interop-tabpanel").forEach((panel) => {
           panel.hidden = panel.dataset.tabpanel !== tab.dataset.tab;
@@ -103,13 +189,13 @@
   async function runAndRenderVerification() {
     const contract = EXAMPLES[currentExampleKey].contract;
     const runStatus = document.getElementById("nm-interop-run-status");
-    if (runStatus) runStatus.textContent = "Running…";
+    if (runStatus) runStatus.textContent = t("verify.running");
 
     let result;
     try {
       result = await runVerification(contract, JWKS);
     } catch (e) {
-      if (runStatus) runStatus.textContent = "Verification failed to run: " + e.message;
+      if (runStatus) runStatus.textContent = t("verify.runError") + e.message;
       return;
     }
 
@@ -119,7 +205,7 @@
     setTermLine("schema", {
       status: result.structural.passed ? "ok" : "fail",
       symbol: result.structural.passed ? "✓" : "✗",
-      detail: `core structural checks ${result.structural.passed ? "passed" : "FAILED"} — ${passedCount}/${total} (declared ${contract.identity.schema_version})`,
+      detail: `${result.structural.passed ? t("terminal.schemaPassed") : t("terminal.schemaFailed")} — ${passedCount}/${total} (declared ${contract.identity.schema_version})`,
       live: true,
     });
 
@@ -127,11 +213,11 @@
     setTermLine("hash", {
       status: result.hash.match ? "ok" : "fail",
       symbol: result.hash.match ? "✓" : "✗",
-      detail: result.hash.match ? "MATCH" : `MISMATCH (recomputed ${result.hash.recomputed.slice(0, 12)}…)`,
+      detail: result.hash.match ? t("terminal.hashMatch") : t("terminal.hashMismatch").replace("{hash}", result.hash.recomputed.slice(0, 12)),
       live: true,
     });
     const hashScopeEl = document.getElementById("nm-interop-hash-scope-text");
-    if (hashScopeEl) hashScopeEl.textContent = "Recomputed live, in your browser, from the raw contract via SubtleCrypto SHA-256.";
+    if (hashScopeEl) hashScopeEl.textContent = t("terminal.hashScopeLive");
 
     // Signature
     const sigScopeEl = document.getElementById("nm-interop-sig-scope-text");
@@ -140,21 +226,19 @@
       setTermLine("signature", {
         status: "warn",
         symbol: "⚠",
-        detail: "NOT VERIFIED IN THIS BROWSER",
+        detail: t("terminal.sigNotSupported"),
         live: false,
       });
-      if (sigScopeEl) sigScopeEl.textContent = "Live verification was attempted in your browser.";
-      if (sigReasonEl) {
-        sigReasonEl.textContent = "This browser's WebCrypto does not implement Ed25519 verification — the check above could not run here. Verify with the reference Python verifier (verify.py) instead.";
-      }
+      if (sigScopeEl) sigScopeEl.textContent = t("terminal.sigScopeLiveUnsupported");
+      if (sigReasonEl) sigReasonEl.textContent = t("terminal.sigReason");
     } else {
       setTermLine("signature", {
         status: result.signature.valid ? "ok" : "fail",
         symbol: result.signature.valid ? "✓" : "✗",
-        detail: result.signature.valid ? "VERIFIED (Ed25519/JWS)" : "NOT VERIFIED — signature or signed claims did not match",
+        detail: result.signature.valid ? t("terminal.sigVerified") : t("terminal.sigNotVerified"),
         live: true,
       });
-      if (sigScopeEl) sigScopeEl.textContent = "Verified live, in your browser, against the public JWKS (GET /v1/rgc/jwks) via SubtleCrypto Ed25519.";
+      if (sigScopeEl) sigScopeEl.textContent = t("terminal.sigScopeLiveSupported");
       if (sigReasonEl) sigReasonEl.textContent = "";
     }
 
@@ -163,12 +247,14 @@
     setTermLine("key", {
       status: keyFound ? "ok" : "fail",
       symbol: keyFound ? "✓" : "✗",
-      detail: `${keyFound ? "RESOLVED" : "NOT FOUND"} — key_id ${contract.integrity.key_id}`,
+      detail: `${keyFound ? t("terminal.keyResolved") : t("terminal.keyNotFound")} — key_id ${contract.integrity.key_id}`,
       live: true,
     });
 
     if (runStatus) {
-      runStatus.textContent = "Done — ran against the \"" + EXAMPLES[currentExampleKey].label + "\" example.";
+      const activeExampleBtn = root.querySelector(".nm-interop-example-btn.is-active");
+      const exampleLabel = activeExampleBtn ? activeExampleBtn.textContent : currentExampleKey;
+      runStatus.textContent = t("verify.runDone").replace("{example}", exampleLabel);
     }
   }
 
@@ -188,11 +274,14 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     applyReducedMotion();
+    initLang();
     renderJsonPanel();
+    updateLegendBlurb();
     wireLegend();
     wireExampleToggle();
     wireTabs();
     wireRunButton();
+    wireLangToggle();
     runAndRenderVerification();
   });
 })();

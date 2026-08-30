@@ -36,12 +36,66 @@
 
 /* ---------- hero ---------- */
 
+.nm-interop-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.nm-interop-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.nm-interop-logo {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+  flex: none;
+}
+
 .nm-interop-eyebrow {
-  margin: 0 0 0.75rem;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--nm-accent);
+}
+
+.nm-interop-lang-toggle {
+  display: flex;
+  gap: 0.4rem;
+  flex: none;
+}
+
+.nm-interop-lang-btn {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--nm-border);
+  background: var(--nm-bg-raised);
+  color: var(--nm-ink-soft);
+  cursor: pointer;
+}
+
+.nm-interop-lang-btn.is-active {
+  background: var(--nm-accent);
+  border-color: var(--nm-accent);
+  color: #fff;
+}
+
+.nm-interop-tagline {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--nm-accent);
 }
 
@@ -67,17 +121,16 @@
   border: 1px solid var(--nm-border);
   border-radius: 12px;
   background: var(--nm-bg-raised);
-  overflow-x: auto;
 }
 
 .nm-interop-flow-list {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 0;
+  flex-wrap: wrap;
+  row-gap: 0.6rem;
+  column-gap: 0;
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
-  min-width: max-content;
 }
 
 .nm-interop-flow-list li {
@@ -98,6 +151,35 @@
   right: 0;
   color: #94a3b8;
   font-weight: 400;
+}
+
+@media (max-width: 560px) {
+  .nm-interop-flow-list {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.5rem;
+  }
+
+  .nm-interop-flow-list li {
+    padding-right: 0;
+    padding-bottom: 1.4rem;
+  }
+
+  .nm-interop-flow-list li:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0.6rem;
+  }
+
+  .nm-interop-flow-boundary {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px dashed #cbd5e1;
+    border-bottom: 1px dashed #cbd5e1;
+    padding: 0.5rem 0 !important;
+  }
 }
 
 .nm-interop-flow-num {
@@ -298,6 +380,14 @@
   box-shadow: inset 3px 0 0 #60a5fa;
 }
 
+/* JSON syntax highlighting — improves default scannability while the
+   underlying text remains the exact, complete raw contract. */
+.nm-interop-json .tok-key { color: #7dd3fc; }
+.nm-interop-json .tok-str { color: #86efac; }
+.nm-interop-json .tok-num { color: #fca5a5; }
+.nm-interop-json .tok-bool { color: #fbbf24; font-weight: 600; }
+.nm-interop-json .tok-null { color: #94a3b8; font-style: italic; }
+
 @media (prefers-reduced-motion: reduce) {
   .nm-interop-json .nm-interop-section-block {
     transition: none;
@@ -446,6 +536,10 @@
   content: " · recomputed live";
   color: #7dd3fc;
   font-weight: 400;
+}
+
+:lang(fr) .nm-interop-term-line[data-check] .nm-interop-term-detail[data-live="true"]::after {
+  content: " · recalculé en direct";
 }
 
 .nm-interop-term-line-final {
