@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeoMundi Measurement Interoperability</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<section class="nm-interop" id="nm-interop">
+
+  <header class="nm-interop-hero">
+    <p class="nm-interop-eyebrow">NeoMundi Measurement Interoperability</p>
+    <h2 class="nm-interop-headline">NeoMundi measures. Your infrastructure decides.</h2>
+    <p class="nm-interop-sub">
+      A public, versioned, cryptographically signed contract for transporting a NeoMundi
+      runtime measurement into your infrastructure — structured so any external system can
+      validate it, verify its integrity and origin independently, and apply its own
+      interpretation and policy.
+    </p>
+  </header>
+
+  <nav class="nm-interop-flow" aria-label="Contract flow">
+    <ol class="nm-interop-flow-list">
+      <li><span class="nm-interop-flow-num">1</span>AI system</li>
+      <li><span class="nm-interop-flow-num">2</span>NeoMundi runtime measurement</li>
+      <li><span class="nm-interop-flow-num">3</span>Signed interoperability contract</li>
+      <li><span class="nm-interop-flow-num">4</span>Schema validation</li>
+      <li><span class="nm-interop-flow-num">5</span>SHA-256 + Ed25519/JWS verification</li>
+      <li class="nm-interop-flow-boundary" role="separator" aria-label="Consumer boundary">
+        <span>consumer&nbsp;boundary</span>
+      </li>
+      <li><span class="nm-interop-flow-num">6</span>Your infrastructure</li>
+      <li><span class="nm-interop-flow-num">7</span>Your policy, your action</li>
+    </ol>
+    <p class="nm-interop-flow-caption">
+      Left of the boundary: what NeoMundi standardizes — transport and verification of the
+      measurement. Right of the boundary: interpretation, policy, thresholds and enforcement,
+      which stay entirely with the consumer.
+    </p>
+  </nav>
+
+  <ul class="nm-interop-badges">
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">{ }</span>JSON, machine-readable</li>
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">#</span>Schema versioned</li>
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">◆</span>SHA-256 integrity</li>
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">✎</span>Ed25519 / JWS signature</li>
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">⇄</span>Independent verification</li>
+    <li><span class="nm-interop-badge-icon" aria-hidden="true">⎋</span>Consumer keeps control</li>
+  </ul>
+
+  <div class="nm-interop-panels">
+
+    <!-- LEFT: the contract -->
+    <div class="nm-interop-panel">
+      <div class="nm-interop-panel-head">
+        <h3>The contract</h3>
+        <div class="nm-interop-example-toggle" role="group" aria-label="Example contract">
+          <button type="button" class="nm-interop-example-btn is-active" data-example="flagged">Flagged — review required</button>
+          <button type="button" class="nm-interop-example-btn" data-example="within_bounds">Within bounds — no review</button>
+        </div>
+        <p class="nm-interop-panel-note">
+          Two real historically signed RGC v0.1 observations from
+          <code>examples/</code> in the repository. Unmodified.
+        </p>
+      </div>
+
+      <ul class="nm-interop-legend" aria-label="Contract sections">
+        <li><button type="button" class="nm-interop-legend-btn" data-section="identity">identity</button></li>
+        <li><button type="button" class="nm-interop-legend-btn" data-section="provenance">provenance</button></li>
+        <li><button type="button" class="nm-interop-legend-btn" data-section="observation">observation</button></li>
+        <li><button type="button" class="nm-interop-legend-btn" data-section="governance">governance</button></li>
+        <li><button type="button" class="nm-interop-legend-btn" data-section="integrity">integrity</button></li>
+      </ul>
+      <p class="nm-interop-legend-blurb" id="nm-interop-legend-blurb">
+        Select a section above to see what it's for.
+      </p>
+
+      <div class="nm-interop-json" id="nm-interop-json">
+        <!-- Static fallback: real signed v0.1 "flagged" example, from
+             examples/flagged-review-required.json. Replaced/enhanced by
+             script.js when JavaScript is available. -->
+        <pre class="nm-interop-json-static"><code>{
+  "identity": {
+    "schema_version": "0.1.0",
+    "request_id": "3d55da6a-8170-4480-a435-b0af0583a9fe",
+    "trace_id": "00-3ff43f4daeaa44efce938d816566a094-278bf1314051a6df-01",
+    "timestamp": "2026-08-17T16:43:47.547079Z",
+    "system_id": "controltower-api",
+    "model": "local",
+    "mode": "OBS"
+  },
+  "provenance": {
+    "measurement_version": "3.0.0",
+    "normalizer_version": "1.0.0",
+    "checks_emitted": 3,
+    "source_batch_id": null,
+    "canonicalization_method": "sorted-json-utf8"
+  },
+  "observation": {
+    "runtime_scope": "single_request",
+    "observation_window": null,
+    "measurement_status": "complete",
+    "measurement_coverage": 0.6,
+    "observed_signals": {
+      "stability_score": 0.615385,
+      "coherence_score": 1.0,
+      "factual_hallucination_score": 1.0,
+      "semantic_instability_score": 0.0,
+      "semantic_risk": 0.0,
+      "observation_class": "flagged",
+      "confidence": 1.0
+    },
+    "limitations": [
+      "Measurement reflects a single runtime observation window; it is not a certification of third-party content.",
+      "The governance signal is advisory only — it does not grant, refuse, suspend, or modify any execution permission.",
+      "Provider/model identity is pseudonymized in this contract and cannot be reversed to the original value."
+    ],
+    "measurement_boundary": "This contract measures a single observed runtime signal. It does not evaluate ground truth, does not certify third-party data, and carries no execution authority."
+  },
+  "governance": {
+    "governance_boundary": {
+      "authorization_status": "not_applicable",
+      "execution_permission_changed": false
+    },
+    "advisory": {
+      "review_recommendation": "required",
+      "review_trigger": ["contradiction", "overclaim", "factual_risk"],
+      "recommended_review_type": ["independent_evidence_review", "human_validation"],
+      "interpretation_policy": {
+        "policy_id": "rgc-piste-b-advisory",
+        "policy_version": "0.1.0"
+      }
+    }
+  },
+  "integrity": {
+    "payload_hash": "6a605bf81bbbf1086289ea974dbfe4011206db0bc9970cfa21aaaf557627811c",
+    "hash_algorithm": "sha256",
+    "canonicalization": "sorted-json-utf8",
+    "signature": "eyJhbGciOiJFZERTQSIsImtpZCI6Im5lb211bmRpLXJnYy0yMDI2LTAxIiwidHlwIjoiSldUIn0.eyJwYXlsb2FkX2hhc2giOiI2YTYwNWJmODFiYmJmMTA4NjI4OWVhOTc0ZGJmZTQwMTEyMDZkYjBiYzk5NzBjZmEyMWFhYWY1NTc2Mjc4MTFjIiwiaGFzaF9hbGdvcml0aG0iOiJzaGEyNTYiLCJzY2hlbWFfdmVyc2lvbiI6IjAuMS4wIiwicmVxdWVzdF9pZCI6IjNkNTVkYTZhLTgxNzAtNDQ4MC1hNDM1LWIwYWYwNTgzYTlmZSIsInRpbWVzdGFtcCI6IjIwMjYtMDgtMTdUMTY6NDM6NDcuNTQ3MDc5WiJ9.tismpbLKt5hG8vYBIF8k42xi35QFGlCZ8bMVavmz-Q0yS1OJRdUDrE5b-izvkczJZh-LvBvmLwBk8RDHdTP_AA",
+    "signer_identity": "neomundi-controltower-rgc",
+    "key_id": "neomundi-rgc-2026-01",
+    "confidentiality_class": "controlled",
+    "retention_reference": "governance_logs:3d55da6a-8170-4480-a435-b0af0583a9fe"
+  }
+}</code></pre>
+        <p class="nm-interop-json-note">
+          <noscript>Enable JavaScript for the interactive version: switch examples, highlight
+          sections, and re-verify this contract live in your browser.</noscript>
+        </p>
+      </div>
+    </div>
+
+    <!-- RIGHT: how a consumer verifies it -->
+    <div class="nm-interop-panel">
+      <div class="nm-interop-panel-head">
+        <h3>How your infrastructure verifies it</h3>
+        <p class="nm-interop-panel-note">
+          Only endpoints and primitives this repository actually documents or uses.
+        </p>
+      </div>
+
+      <div class="nm-interop-tabs" role="tablist" aria-label="Verification language">
+        <button type="button" class="nm-interop-tab is-active" role="tab" aria-selected="true" data-tab="curl">cURL</button>
+        <button type="button" class="nm-interop-tab" role="tab" aria-selected="false" data-tab="python">Python</button>
+        <button type="button" class="nm-interop-tab" role="tab" aria-selected="false" data-tab="js">JavaScript</button>
+      </div>
+
+      <div class="nm-interop-tabpanel" data-tabpanel="curl">
+        <p class="nm-interop-code-caption">Public schema and verification keys — README §11.</p>
+        <pre><code>curl https://api.neomundi.io/v1/rgc/schema
+
+curl https://api.neomundi.io/v1/rgc/jwks</code></pre>
+        <p class="nm-interop-code-caption">Obtain a contract for an existing observation — README §12 (requires an API key).</p>
+        <pre><code>curl -X POST \
+  "https://api.neomundi.io/v1/rgc/contracts/{request_id}" \
+  -H "X-API-Key: YOUR_NEOMUNDI_API_KEY"</code></pre>
+      </div>
+
+      <div class="nm-interop-tabpanel" data-tabpanel="python" hidden>
+        <p class="nm-interop-code-caption">Adapted from <code>consumer-reference/rgc_consumer_demo/verify.py</code> in this repository — standard library + <code>cryptography</code> and <code>pyjwt</code> only, no NeoMundi internal code.</p>
+        <pre><code>import hashlib, json, base64
+import jwt
+from cryptography.hazmat.primitives.asymmetric import ed25519
+from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+
+def canonical_sha256(payload: dict) -> str:
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+def recompute_payload_hash(contract: dict) -> str:
+    # integrity itself is excluded from its own hash
+    sections = {k: contract[k] for k in
+                ("identity", "provenance", "observation", "governance")}
+    return canonical_sha256(sections)
+
+def verify_signature(contract: dict, jwks: dict) -> bool:
+    key_id = contract["integrity"]["key_id"]
+    jwk = next(k for k in jwks["keys"] if k["kid"] == key_id)
+    x = jwk["x"]
+    raw = base64.urlsafe_b64decode(x + "=" * (-len(x) % 4))
+    public_key = ed25519.Ed25519PublicKey.from_public_bytes(raw)
+    pem = public_key.public_bytes(
+        encoding=Encoding.PEM, format=PublicFormat.SubjectPublicKeyInfo
+    )
+    claims = jwt.decode(
+        contract["integrity"]["signature"],
+        pem,
+        algorithms=["EdDSA"],
+        options={"verify_aud": False},
+    )
+    return claims["payload_hash"] == contract["integrity"]["payload_hash"]</code></pre>
+      </div>
+
+      <div class="nm-interop-tabpanel" data-tabpanel="js" hidden>
+        <p class="nm-interop-code-caption">Runs live, in this page, against the example selected on the left — via <code>SubtleCrypto</code> (SHA-256 always; Ed25519 where the browser's WebCrypto implements it).</p>
+        <pre><code>const canonical = JSON.stringify(sortedSections); // sort-keys, Python-compatible
+const digest = await crypto.subtle.digest(
+  "SHA-256", new TextEncoder().encode(canonical)
+);
+const recomputed = toHex(digest);
+// recomputed === contract.integrity.payload_hash ?
+
+const publicKey = await crypto.subtle.importKey(
+  "jwk", jwk, { name: "Ed25519" }, true, ["verify"]
+);
+const valid = await crypto.subtle.verify(
+  { name: "Ed25519" }, publicKey, signatureBytes, signingInput
+);</code></pre>
+        <button type="button" class="nm-interop-run-btn" id="nm-interop-run-btn">Run live verification</button>
+        <p class="nm-interop-code-caption" id="nm-interop-run-status"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nm-interop-terminal" id="nm-interop-terminal" aria-live="polite">
+    <div class="nm-interop-term-titlebar">CONTRACT RECEIVED</div>
+
+    <div class="nm-interop-term-line" data-check="schema">
+      <span class="nm-interop-term-status" data-status="ok">✓</span>
+      <span class="nm-interop-term-label">Schema</span>
+      <span class="nm-interop-term-detail">core structural checks passed — 6/6 (declared 0.1.0)</span>
+      <span class="nm-interop-term-scope">Checked: required sections, model pattern, coverage range, execution_permission_changed=false. Not checked here: full JSON Schema Draft 2020-12 (all $ref / enum / format rules) — <a href="https://github.com/neomundi-io/neomundi-measurement-interoperability/blob/main/consumer-reference/rgc_consumer_demo/validate.py" target="_blank" rel="noopener">run the reference Python validator</a> for that.</span>
+    </div>
+
+    <div class="nm-interop-term-line" data-check="hash">
+      <span class="nm-interop-term-status" data-status="ok">✓</span>
+      <span class="nm-interop-term-label">SHA-256</span>
+      <span class="nm-interop-term-detail">MATCH (documented result — see README "Expected historical result")</span>
+      <span class="nm-interop-term-scope"><span id="nm-interop-hash-scope-text">Precomputed. Enable JavaScript to recompute this fingerprint live, in your browser, from the raw contract.</span></span>
+    </div>
+
+    <div class="nm-interop-term-line" data-check="signature">
+      <span class="nm-interop-term-status" data-status="ok">✓</span>
+      <span class="nm-interop-term-label">Signature</span>
+      <span class="nm-interop-term-detail">VERIFIED (documented result — Ed25519/JWS)</span>
+      <span class="nm-interop-term-scope"><span id="nm-interop-sig-scope-text">Precomputed. Enable JavaScript to verify this Ed25519/JWS signature live against the public JWKS.</span> <span id="nm-interop-sig-reason"></span></span>
+    </div>
+
+    <div class="nm-interop-term-line" data-check="key">
+      <span class="nm-interop-term-status" data-status="ok">✓</span>
+      <span class="nm-interop-term-label">Key</span>
+      <span class="nm-interop-term-detail">RESOLVED — key_id neomundi-rgc-2026-01</span>
+      <span class="nm-interop-term-scope">Found in the published JWKS (<code>GET /v1/rgc/jwks</code>).</span>
+    </div>
+
+    <div class="nm-interop-term-line nm-interop-term-line-final">
+      <span class="nm-interop-term-status" data-status="neutral">→</span>
+      <span class="nm-interop-term-label">Measurement</span>
+      <span class="nm-interop-term-detail">available to consumer</span>
+    </div>
+    <div class="nm-interop-term-line nm-interop-term-line-final nm-interop-term-control">
+      <span class="nm-interop-term-status" data-status="neutral">→</span>
+      <span class="nm-interop-term-label">CONTROL</span>
+      <span class="nm-interop-term-detail">remains with your infrastructure</span>
+    </div>
+
+    <noscript><p class="nm-interop-noscript-note">JavaScript is disabled: the Schema/SHA-256/Signature/Key lines above show the documented outcome for this exact signed example, not a live recomputation. Enable JavaScript to re-run every check in your own browser.</p></noscript>
+  </div>
+
+  <div class="nm-interop-cta">
+    <a class="nm-interop-cta-btn" href="https://github.com/neomundi-io/neomundi-measurement-interoperability/blob/main/schema/contract-v0.2.schema.json" target="_blank" rel="noopener">View JSON Schema</a>
+    <a class="nm-interop-cta-btn" href="https://github.com/neomundi-io/neomundi-measurement-interoperability" target="_blank" rel="noopener">View on GitHub</a>
+    <a class="nm-interop-cta-btn" href="https://github.com/neomundi-io/neomundi-measurement-interoperability/blob/main/consumer-reference/README.md" target="_blank" rel="noopener">Integration Guide</a>
+  </div>
+
+  <p class="nm-interop-footnote">
+    NeoMundi provides the measurement signal and its verifiable trace. It does not grant,
+    revoke, or otherwise alter execution permission, and does not require access to your
+    policy engine, thresholds, or enforcement logic.
+  </p>
+
+</section>
+
+<script src="data.js"></script>
+<script src="verify.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

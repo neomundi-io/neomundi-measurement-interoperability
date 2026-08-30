@@ -1,0 +1,517 @@
+/**
+ * NeoMundi Measurement Interoperability — embeddable demo section.
+ * All selectors are scoped under .nm-interop to avoid clashing with an
+ * existing site's styles. Safe to drop this section + its assets into an
+ * existing page.
+ */
+
+.nm-interop {
+  --nm-ink: #0f172a;
+  --nm-ink-soft: #475569;
+  --nm-border: #e2e8f0;
+  --nm-bg: #ffffff;
+  --nm-bg-raised: #f8fafc;
+  --nm-accent: #1d4ed8;
+  --nm-accent-soft: #eef2ff;
+  --nm-ok: #15803d;
+  --nm-ok-bg: #f0fdf4;
+  --nm-warn: #b45309;
+  --nm-warn-bg: #fffbeb;
+  --nm-mono: "SF Mono", ui-monospace, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  --nm-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+
+  box-sizing: border-box;
+  background: var(--nm-bg);
+  color: var(--nm-ink);
+  font-family: var(--nm-sans);
+  line-height: 1.5;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.nm-interop *, .nm-interop *::before, .nm-interop *::after {
+  box-sizing: inherit;
+}
+
+/* ---------- hero ---------- */
+
+.nm-interop-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nm-accent);
+}
+
+.nm-interop-headline {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.nm-interop-sub {
+  margin: 0 0 2.5rem;
+  max-width: 62ch;
+  font-size: 1.05rem;
+  color: var(--nm-ink-soft);
+}
+
+/* ---------- flow ---------- */
+
+.nm-interop-flow {
+  margin-bottom: 2.25rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid var(--nm-border);
+  border-radius: 12px;
+  background: var(--nm-bg-raised);
+  overflow-x: auto;
+}
+
+.nm-interop-flow-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  min-width: max-content;
+}
+
+.nm-interop-flow-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--nm-ink);
+  white-space: nowrap;
+  padding-right: 1.1rem;
+  position: relative;
+}
+
+.nm-interop-flow-list li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: 0;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.nm-interop-flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background: var(--nm-accent-soft);
+  color: var(--nm-accent);
+  font-size: 0.7rem;
+  flex: none;
+}
+
+.nm-interop-flow-boundary {
+  padding: 0 1.25rem !important;
+  font-weight: 700 !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8 !important;
+  border-left: 1px dashed #cbd5e1;
+  border-right: 1px dashed #cbd5e1;
+}
+
+.nm-interop-flow-boundary::after {
+  content: "" !important;
+}
+
+.nm-interop-flow-caption {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--nm-ink-soft);
+  max-width: 78ch;
+}
+
+/* ---------- badges ---------- */
+
+.nm-interop-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+}
+
+.nm-interop-badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--nm-border);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--nm-bg-raised);
+}
+
+.nm-interop-badge-icon {
+  font-family: var(--nm-mono);
+  color: var(--nm-accent);
+  font-size: 0.8rem;
+}
+
+/* ---------- panels ---------- */
+
+.nm-interop-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .nm-interop-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nm-interop-panel {
+  min-width: 0;
+  border: 1px solid var(--nm-border);
+  border-radius: 12px;
+  background: var(--nm-bg);
+  padding: 1.25rem;
+}
+
+.nm-interop-panel-head h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.nm-interop-panel-note {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  color: var(--nm-ink-soft);
+}
+
+.nm-interop-panel-note code {
+  font-family: var(--nm-mono);
+  font-size: 0.8em;
+}
+
+.nm-interop-example-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.nm-interop-example-btn {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--nm-border);
+  background: var(--nm-bg-raised);
+  color: var(--nm-ink-soft);
+  cursor: pointer;
+}
+
+.nm-interop-example-btn.is-active {
+  background: var(--nm-accent);
+  border-color: var(--nm-accent);
+  color: #fff;
+}
+
+.nm-interop-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0 0 0.6rem;
+  padding: 0;
+}
+
+.nm-interop-legend-btn {
+  font: inherit;
+  font-family: var(--nm-mono);
+  font-size: 0.76rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--nm-border);
+  background: var(--nm-bg-raised);
+  cursor: pointer;
+  color: var(--nm-ink);
+}
+
+.nm-interop-legend-btn.is-active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+}
+
+.nm-interop-legend-blurb {
+  min-height: 2.6em;
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  color: var(--nm-ink-soft);
+}
+
+.nm-interop-json {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--nm-border);
+}
+
+.nm-interop-json pre {
+  margin: 0;
+  padding: 1rem;
+  background: #0b1120;
+  color: #e2e8f0;
+  font-family: var(--nm-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.nm-interop-json-note {
+  margin: 0;
+}
+
+.nm-interop-json .nm-interop-section-block {
+  display: block;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nm-interop-json .nm-interop-section-block.is-highlighted {
+  background: rgba(59, 130, 246, 0.18);
+  box-shadow: inset 3px 0 0 #60a5fa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nm-interop-json .nm-interop-section-block {
+    transition: none;
+  }
+}
+
+/* ---------- tabs ---------- */
+
+.nm-interop-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--nm-border);
+}
+
+.nm-interop-tab {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.2rem;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--nm-ink-soft);
+  cursor: pointer;
+}
+
+.nm-interop-tab.is-active {
+  color: var(--nm-accent);
+  border-bottom-color: var(--nm-accent);
+}
+
+/* Progressive enhancement: without JS, all tab panels are shown stacked
+   and readable. JS adds hidden attributes and click handling. */
+.nm-interop-tabpanel {
+  margin-bottom: 1rem;
+}
+
+.nm-interop-tabpanel pre {
+  margin: 0 0 0.75rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1120;
+  color: #e2e8f0;
+  font-family: var(--nm-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+.nm-interop-code-caption {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  color: var(--nm-ink-soft);
+}
+
+.nm-interop-code-caption code {
+  font-family: var(--nm-mono);
+  font-size: 0.9em;
+}
+
+.nm-interop-run-btn {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--nm-accent);
+  background: var(--nm-accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.nm-interop-run-btn:hover {
+  filter: brightness(1.08);
+}
+
+#nm-interop-run-status {
+  margin-top: 0.6rem;
+}
+
+/* ---------- terminal ---------- */
+
+.nm-interop-terminal {
+  border-radius: 12px;
+  background: #0b1120;
+  color: #e2e8f0;
+  padding: 1.25rem 1.4rem 1.4rem;
+  font-family: var(--nm-mono);
+  font-size: 0.85rem;
+  margin-bottom: 2.5rem;
+}
+
+.nm-interop-term-titlebar {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+  margin-bottom: 0.85rem;
+}
+
+.nm-interop-term-line {
+  display: grid;
+  grid-template-columns: 1.4rem 6.5rem 1fr;
+  gap: 0.6rem 0.75rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.nm-interop-term-line:first-of-type {
+  border-top: none;
+}
+
+.nm-interop-term-status {
+  font-weight: 700;
+}
+
+.nm-interop-term-status[data-status="ok"] { color: #4ade80; }
+.nm-interop-term-status[data-status="warn"] { color: #fbbf24; }
+.nm-interop-term-status[data-status="fail"] { color: #f87171; }
+.nm-interop-term-status[data-status="neutral"] { color: #7dd3fc; }
+
+.nm-interop-term-label {
+  color: #cbd5e1;
+  font-weight: 700;
+}
+
+.nm-interop-term-detail {
+  color: #f1f5f9;
+}
+
+.nm-interop-term-scope {
+  grid-column: 2 / -1;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.nm-interop-term-scope a {
+  color: #7dd3fc;
+}
+
+.nm-interop-term-line[data-check] .nm-interop-term-detail[data-live="true"]::after {
+  content: " · recomputed live";
+  color: #7dd3fc;
+  font-weight: 400;
+}
+
+.nm-interop-term-line-final {
+  border-top: 1px dashed rgba(148, 163, 184, 0.3);
+}
+
+.nm-interop-term-control .nm-interop-term-label,
+.nm-interop-term-control .nm-interop-term-detail {
+  color: #fde68a;
+}
+
+.nm-interop-noscript-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: var(--nm-sans);
+}
+
+/* ---------- CTA ---------- */
+
+.nm-interop-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.nm-interop-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid var(--nm-border);
+  color: var(--nm-ink);
+  text-decoration: none;
+  background: var(--nm-bg-raised);
+}
+
+.nm-interop-cta-btn:hover {
+  border-color: var(--nm-accent);
+  color: var(--nm-accent);
+}
+
+.nm-interop-footnote {
+  max-width: 78ch;
+  font-size: 0.78rem;
+  color: var(--nm-ink-soft);
+  margin: 0;
+}
+
+/* ---------- dark mode (host page opt-in) ---------- */
+
+@media (prefers-color-scheme: dark) {
+  .nm-interop {
+    --nm-ink: #e2e8f0;
+    --nm-ink-soft: #94a3b8;
+    --nm-border: #1e293b;
+    --nm-bg: #0f172a;
+    --nm-bg-raised: #131f35;
+    --nm-accent: #60a5fa;
+    --nm-accent-soft: #17233c;
+  }
+
+  .nm-interop-cta-btn {
+    color: var(--nm-ink);
+  }
+}
