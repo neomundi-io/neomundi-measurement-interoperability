@@ -1,24 +1,75 @@
 # NeoMundi Measurement Interoperability
 
-[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) · [NeoMundi](https://neomundi.io) · [Live Demo](https://interop.neomundi.org/) · [API](https://api.neomundi.io)
+[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) ·
+[NeoMundi](https://neomundi.io) · [Live Demo](https://interop.neomundi.org/) ·
+[API](https://api.neomundi.io)
 
-> **Public interoperability specification for transporting signed, versioned and independently verifiable NeoMundi runtime measurement signals across independent systems.**
+## Transport verifiable AI runtime measurements across independent systems
+
+NeoMundi Measurement Interoperability is the public contract for transporting
+a NeoMundi runtime measurement from one system to another as signed, versioned
+and independently verifiable JSON.
+
+It allows an independent infrastructure to:
+
+- receive a NeoMundi measurement without depending on the internal measurement
+  engine;
+- validate the record against its declared schema version;
+- verify its integrity, signature and provenance;
+- understand what was measured, what was not measured and the limits of the
+  observation;
+- retain an auditable receipt;
+- apply its own interpretation, policy and operational action.
+
+The same contract can be consumed by **observability platforms, audit and
+compliance systems, governance tools, insurers, AI agents, cloud platforms and
+partner infrastructures**.
+
+> **NeoMundi measures. Your infrastructure verifies, interprets and decides.**
+
+**Open interface · Signed contract · Versioned semantics · Independent verification**
+
+### Obtain and verify your first contract
+
+1. **Create your NeoMundi account and API key**  
+   [Open the NeoMundi platform →](https://controltower.neomundi.io/welcome)
+
+2. **Generate a NeoMundi runtime measurement**  
+   [Follow the Runtime Measurement Quickstart →](https://github.com/neomundi-io/neomundi-runtime-measurement/blob/main/QUICKSTART.md)
+
+3. **Retrieve the interoperability contract**
+
+   ```bash
+   curl -X POST \
+     "https://api.neomundi.io/v1/rgc/contracts/{request_id}" \
+     -H "X-API-Key: YOUR_NEOMUNDI_API_KEY"
+   ```
+
+4. **Validate and verify it independently**  
+   Match the declared schema version, validate the JSON, verify the SHA-256
+   fingerprint and Ed25519/JWS signature, then apply your own policy.
+
+[Examples](./examples/) · [Reference Consumer](./consumer-reference/) ·
+[JSON Schema](https://api.neomundi.io/v1/rgc/schema) ·
+[Public Verification Keys](https://api.neomundi.io/v1/rgc/jwks)
+
+### Version status
+
+| Version | Role |
+|---|---|
+| **RGC v0.1** | Historical signed pilot contract retained unchanged for reproducibility and compatibility |
+| **RGC v0.2** | Corrected versioned semantics for partial measurement, coverage, per-signal status and measured-domain interpretation |
+
+Historical signed artifacts remain immutable. Automated consumers must always
+use the semantics of the schema version declared by the contract.
+
+This contract is challenged, tested and strengthened through independent
+contributors and pilot infrastructures. See
+[Contributors & Collective Development](./CONTRIBUTORS.md).
 
 ---
 
-**What is it?**
-A public contract for transporting a NeoMundi AI runtime measurement from one system to another in a signed, versioned and verifiable JSON format.
-
-**What is it for?**
-It allows an independent infrastructure to receive a NeoMundi measurement, verify its integrity and provenance, understand its measurement boundary, and decide what to do with it according to its own policy.
-
-**Who is it for?**
-Cloud platforms, AI systems, agents, governance tools, observability systems, audit infrastructures, monitoring platforms and any system that needs to consume NeoMundi measurements without depending on NeoMundi's internal measurement engine.
-
-**How do I use it?**
-Generate or receive a NeoMundi measurement contract, validate it against the schema version it declares, independently verify its cryptographic integrity, then apply your own interpretation and policy.
-
-**This contract is not being developed in isolation. It is being challenged, tested and strengthened through independent contributors and pilot infrastructures — see [Contributors & Collective Development](./CONTRIBUTORS.md).**
+## Contract flow
 
 ```text
 AI system
@@ -35,8 +86,6 @@ your system decides what to do
 ```
 
 **NeoMundi measures. Your infrastructure decides.**
-
-[Examples](./examples/) · [Reference Consumer](./consumer-reference/)
 
 ---
 
@@ -115,7 +164,10 @@ It enables an external infrastructure to:
 * apply its own governance rules;
 * retain an auditable proof record.
 
-The contract defines **what the signal means and how it may be safely consumed**.
+The contract defines **how the measurement record is structured, verified and
+safely consumed across systems**. The meaning and interpretation limits of the
+underlying signals are defined by the
+[NeoMundi Metric Contract](https://github.com/neomundi-io/neomundi-metric-contract).
 
 It does not require reconstruction of the internal NeoMundi measurement engine.
 
@@ -1086,6 +1138,6 @@ One measurement primitive. Multiple applications. Multiple infrastructures.
 
 ---
 
-© 2026 NeoMundi / Louis M Sàrl — All rights reserved.
+© 2026 NeoMundi — All rights reserved.
 
 Open-source licensing is planned for a future release.
