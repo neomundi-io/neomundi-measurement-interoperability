@@ -2,7 +2,7 @@
 
 [🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) ·
 [NeoMundi](https://neomundi.io) · [Live Demo](https://interop.neomundi.org/) ·
-[API](https://api.neomundi.io)
+[Create an account](https://controltower.neomundi.io/welcome)
 
 ## Transport verifiable AI runtime measurements across independent systems
 
