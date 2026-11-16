@@ -203,28 +203,7 @@ Principaux thèmes soulevés :
 
 Sa contribution a également ouvert une voie de validation pratique au travers des **environnements de simulation AEROS**.
 
----
 
-## James Aull
-
-**Focus de contribution :** déclaration vs observation vs interprétation vs autorité.
-
-**Principaux thèmes soulevés :**
-
-* préserver l’identité, la continuité temporelle et la provenance ;
-* distinguer l’état déclaré de l’état observé ;
-* préserver explicitement l’intégrité et les limitations ;
-* ne pas fusionner silencieusement ce qu’une infrastructure a déclaré, ce qu’une autre a observé et ce qu’un évaluateur a ensuite conclu ;
-* maintenir chaque couche attribuable et révisable indépendamment ;
-* empêcher que l’interopérabilité ne devienne un transfert d’autorité ou une absorption de framework.
-
-Son retour a renforcé une discipline centrale de conception :
-
-```text
-Déclaration ≠ Observation
-Observation ≠ Interprétation
-Interprétation ≠ Autorité
-```
 ---
 
 # 2. Principes communs émergents

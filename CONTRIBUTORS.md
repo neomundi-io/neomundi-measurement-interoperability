@@ -202,28 +202,6 @@ Key themes raised:
 
 His contribution also opened a practical validation path through **AEROS simulation environments**.
 
----
-
-## James Aull
-
-**Contribution focus:** declaration vs observation vs interpretation vs authority.
-
-**Key themes raised:**
-
-* preserve identity, time continuity and provenance;
-* distinguish declared state from observed state;
-* explicitly preserve integrity and limitations;
-* do not silently merge what one infrastructure declared, another observed, and a reviewer later concluded;
-* keep each layer attributable and independently reviewable;
-* prevent interoperability from becoming authority transfer or framework absorption.
-
-His feedback reinforced a central design discipline:
-
-```text
-Declaration ≠ Observation
-Observation ≠ Interpretation
-Interpretation ≠ Authority
-```
 
 ---
 
