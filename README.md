@@ -1,8 +1,18 @@
+<div align="center">
+
+[![English](https://img.shields.io/badge/EN-English-2563eb?style=flat-square)](README.md) · [![Français](https://img.shields.io/badge/FR-Fran%C3%A7ais-2563eb?style=flat-square)](README_FR.md)
+
 # NeoMundi Measurement Interoperability
 
-[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) ·
-[NeoMundi](https://neomundi.io) · [Live Demo](https://interop.neomundi.org/) ·
-[Create an account](https://controltower.neomundi.io/welcome)
+**One measurement primitive. Multiple applications. Multiple infrastructures.**
+
+**[Live interoperability demo](https://interop.neomundi.org/)** · **[First contract](#obtain-and-verify-your-first-contract)** · **[Create an account](https://controltower.neomundi.io/welcome)**
+
+[Product architecture](https://github.com/neomundi-io/.github/blob/main/docs/PRODUCT_ARCHITECTURE.md) · [All components](https://github.com/orgs/neomundi-io/repositories)
+
+**[neomundi.io](https://neomundi.io/)**
+
+</div>
 
 ## Transport verifiable AI runtime measurements across independent systems
 
@@ -72,6 +82,19 @@ use the semantics of the schema version declared by the contract.
 This contract is challenged, tested and strengthened through independent
 contributors and pilot infrastructures. See
 [Contributors & Collective Development](./CONTRIBUTORS.md).
+
+---
+
+## From runtime measurement to independent decision
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/neomundi-io/neomundi-measurement-interoperability/main/assets/interoperability-flow-en-dark.svg">
+    <img alt="NeoMundi interoperability flow: produce a runtime measurement, package a signed versioned JSON contract, independently validate integrity and signature, then let the consuming system apply its own policy and action." src="https://raw.githubusercontent.com/neomundi-io/neomundi-measurement-interoperability/main/assets/interoperability-flow-en-light.svg" width="100%">
+  </picture>
+</p>
+
+**The interface carries evidence, not execution authority.** The consumer owns interpretation, policy and decision. Missing signals remain missing; historical contracts retain their original schema semantics.
 
 ---
 

@@ -1,8 +1,18 @@
+<div align="center">
+
+[![Français](https://img.shields.io/badge/FR-Fran%C3%A7ais-2563eb?style=flat-square)](README_FR.md) · [![English](https://img.shields.io/badge/EN-English-2563eb?style=flat-square)](README.md)
+
 # NeoMundi Measurement Interoperability
 
-[🇬🇧 English](./README.md) · [🇫🇷 Français](./README_FR.md) ·
-[NeoMundi](https://neomundi.io) · [Démonstration](https://interop.neomundi.org/) ·
-[Créer un compte](https://controltower.neomundi.io/welcome)
+**Une primitive de mesure. Plusieurs applications. Plusieurs infrastructures.**
+
+**[Voir la démonstration](https://interop.neomundi.org/)** · **[Premier contrat](#obtenir-et-vérifier-votre-premier-contrat)** · **[Créer un compte](https://controltower.neomundi.io/welcome)**
+
+[Architecture produit](https://github.com/neomundi-io/.github/blob/main/docs/PRODUCT_ARCHITECTURE.fr.md) · [Tous les composants](https://github.com/orgs/neomundi-io/repositories)
+
+**[neomundi.io](https://neomundi.io/)**
+
+</div>
 
 ## Transporter des mesures runtime d’IA vérifiables entre des systèmes indépendants
 
@@ -62,6 +72,19 @@ Le même contrat peut être consommé par des **plateformes d’observabilité, 
 Les artefacts historiques signés restent immuables. Les consommateurs automatisés doivent toujours utiliser la sémantique de la version de schéma déclarée par le contrat.
 
 Ce contrat est mis à l’épreuve, testé et renforcé par des contributeurs indépendants et des infrastructures pilotes. Voir [Contributeurs et développement collectif](./CONTRIBUTORS.md).
+
+---
+
+## De la mesure runtime à la décision indépendante
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/neomundi-io/neomundi-measurement-interoperability/main/assets/interoperability-flow-fr-dark.svg">
+    <img alt="Parcours du contrat d'interopérabilité : produire une mesure, constituer un contrat JSON signé et versionné, vérifier indépendamment l'intégrité et la signature, puis laisser le système consommateur décider." src="https://raw.githubusercontent.com/neomundi-io/neomundi-measurement-interoperability/main/assets/interoperability-flow-fr-light.svg" width="100%">
+  </picture>
+</p>
+
+**Le contrat transporte une preuve, pas une autorisation d'exécution.** L'interprétation, la politique et la décision appartiennent au système consommateur. Les signaux absents restent absents ; les anciens contrats conservent leur sémantique de version.
 
 ---
 
