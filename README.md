@@ -6,6 +6,10 @@
 
 ## Transport verifiable AI runtime measurements across independent systems
 
+**One measurement primitive. Multiple applications. Multiple infrastructures.**
+
+**Your systems. Your decisions. Verifiable evidence.**
+
 NeoMundi Measurement Interoperability is the public contract for transporting
 a NeoMundi runtime measurement from one system to another as signed, versioned
 and independently verifiable JSON.
@@ -26,6 +30,8 @@ compliance systems, governance tools, insurers, AI agents, cloud platforms and
 partner infrastructures**.
 
 > **NeoMundi measures. Your infrastructure verifies, interprets and decides.**
+
+**From a runtime measurement to evidence your own systems can independently check.**
 
 **Open interface · Signed contract · Versioned semantics · Independent verification**
 

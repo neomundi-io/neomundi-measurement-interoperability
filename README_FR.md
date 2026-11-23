@@ -6,6 +6,10 @@
 
 ## Transporter des mesures runtime d’IA vérifiables entre des systèmes indépendants
 
+**Une primitive de mesure. Plusieurs applications. Plusieurs infrastructures.**
+
+**Vos systèmes. Vos décisions. Des preuves vérifiables.**
+
 NeoMundi Measurement Interoperability est le contrat public permettant de transporter une mesure runtime NeoMundi d’un système à un autre sous la forme d’un objet JSON signé, versionné et vérifiable de manière indépendante.
 
 Il permet à une infrastructure indépendante de :
@@ -20,6 +24,8 @@ Il permet à une infrastructure indépendante de :
 Le même contrat peut être consommé par des **plateformes d’observabilité, des systèmes d’audit et de conformité, des outils de gouvernance, des assureurs, des agents IA, des plateformes cloud et des infrastructures partenaires**.
 
 > **NeoMundi mesure. Votre infrastructure vérifie, interprète et décide.**
+
+**De la mesure runtime aux preuves que vos propres systèmes peuvent contrôler indépendamment.**
 
 **Interface ouverte · Contrat signé · Sémantique versionnée · Vérification indépendante**
 
