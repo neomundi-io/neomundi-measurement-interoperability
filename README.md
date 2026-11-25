@@ -4,6 +4,10 @@
 
 # NeoMundi Measurement Interoperability
 
+**Connect verifiable runtime AI measurements to your existing monitoring and control workflows.**
+
+Independent consuming systems verify signed records and retain authority over their own operational decisions.
+
 **One measurement primitive. Multiple applications. Multiple infrastructures.**
 
 **[Live interoperability demo](https://interop.neomundi.org/)** · **[First contract](#obtain-and-verify-your-first-contract)** · **[Create an account](https://controltower.neomundi.io/welcome)**
