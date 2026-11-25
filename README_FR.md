@@ -4,6 +4,10 @@
 
 # NeoMundi Measurement Interoperability
 
+**Intégrez les mesures vérifiables des IA en exécution à vos workflows existants de surveillance et de pilotage.**
+
+Les systèmes consommateurs indépendants vérifient les enregistrements signés et conservent l'autorité sur leurs propres décisions opérationnelles.
+
 **Une primitive de mesure. Plusieurs applications. Plusieurs infrastructures.**
 
 **[Voir la démonstration](https://interop.neomundi.org/)** · **[Premier contrat](#obtenir-et-vérifier-votre-premier-contrat)** · **[Créer un compte](https://controltower.neomundi.io/welcome)**
